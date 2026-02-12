@@ -1,0 +1,99 @@
+.theme-switcher {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3);
+  border-radius: var(--radius-md);
+}
+
+.theme-switcher button {
+  display: flex;
+  align-items: center;
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  color: var(--color-text-secondary);
+  transition: all var(--transition-normal);
+  min-width: 120px;
+}
+
+.theme-switcher button:hover {
+  border-color: var(--color-secondary);
+  transform: scale(1.05);
+}
+
+.theme-switcher button:focus {
+  outline: none;
+  ring: 2px solid var(--color-primary);
+  ring-offset: 2px solid var(--color-background);
+}
+
+.theme-switcher button .w-4 {
+  width: 1rem;
+  height: 1rem;
+}
+
+.theme-switcher button .h-4 {
+  height: 1rem;
+}
+
+.theme-switcher button .rounded-full {
+  border-radius: var(--radius-full);
+}
+
+.theme-switcher button .border {
+  border: 2px solid;
+}
+
+.theme-switcher button .bg-white {
+  background: white;
+}
+
+.theme-switcher button .bg-gray-900 {
+  background: #111827;
+}
+
+.theme-switcher button .bg-green-900 {
+  background: var(--color-primary);
+}
+
+.theme-switcher button .border-gray-300 {
+  border-color: #d1d5db;
+}
+
+.theme-switcher button .border-gray-600 {
+  border-color: #4b5563;
+}
+
+.theme-switcher button .border-green-700 {
+  border-color: var(--color-secondary);
+}
+
+.theme-switcher button.ring-opacity-50 {
+  ring-color: var(--color-primary);
+  ring-opacity: 0.5;
+}
+
+/* Dark theme support */
+[data-theme="dark"] .theme-switcher,
+[data-theme="dark-green"] .theme-switcher {
+  background: var(--color-surface-alt);
+}
+
+[data-theme="dark"] .theme-switcher button,
+[data-theme="dark-green"] .theme-switcher button {
+  background: var(--color-surface);
+  color: var(--color-text-secondary);
+  border-color: var(--color-border);
+}
+
+[data-theme="dark"] .theme-switcher button:hover,
+[data-theme="dark-green"] .theme-switcher button:hover {
+  border-color: var(--color-secondary);
+  background: var(--color-surface-alt);
+}
+
+[data-theme="dark"] .theme-switcher button:focus,
+[data-theme="dark-green"] .theme-switcher button:focus {
+  ring-offset-color: var(--color-background);
+}

@@ -4,6 +4,7 @@ import { ErrorBoundary } from '@components/common';
 import { Layout } from '@components/layout';
 import { useAuthStore } from '@store/authStore';
 import Loading from '@components/common/Loading';
+import { ThemeProvider } from './contexts/ThemeContext';
 
 // Lazy load pages for better performance
 const Home = React.lazy(() => import('@pages/Home/Home'));
@@ -57,10 +58,11 @@ const PublicRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 
 function App() {
   return (
-    <ErrorBoundary>
-      <Router>
-        <Layout>
-          <Suspense fallback={<PageLoading />}>
+    <ThemeProvider>
+      <ErrorBoundary>
+        <Router>
+          <Layout>
+            <Suspense fallback={<PageLoading />}>
             <Routes>
               {/* Public Routes */}
               <Route path="/" element={<Home />} />
@@ -229,10 +231,11 @@ function App() {
                 } 
               />
             </Routes>
-          </Suspense>
+            </Suspense>
         </Layout>
-      </Router>
-    </ErrorBoundary>
+        </Router>
+      </ErrorBoundary>
+    </ThemeProvider>
   );
 }
 
