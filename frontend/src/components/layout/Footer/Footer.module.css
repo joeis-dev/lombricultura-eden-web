@@ -169,6 +169,29 @@
   justify-content: space-between;
   flex-wrap: wrap;
   gap: var(--space-4);
+  width: 100%;
+}
+
+/* Developer credit */
+.footerCredit {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top: var(--space-4);
+  order: 3;
+}
+
+.creditLink {
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  transition: color var(--transition-normal);
+  font-weight: var(--font-weight-medium);
+}
+
+.creditLink:hover {
+  color: var(--color-primary);
+  text-decoration: none;
 }
 
 .copyright {
