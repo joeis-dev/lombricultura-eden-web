@@ -5,7 +5,7 @@ spring:
   datasource:
     url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/lombriculturaeden_db}
     username: ${SPRING_DATASOURCE_USERNAME:lombriculturaeden_user}
-    password: ${SPRING_DATASOURCE_PASSWORD:dev_password_123}
+    password: ${SPRING_DATASOURCE_PASSWORD:CHANGE_THIS_PASSWORD}
     driver-class-name: org.postgresql.Driver
     hikari:
       maximum-pool-size: 10
@@ -65,7 +65,7 @@ springdoc:
 
 application:
   jwt:
-    secret: ${JWT_SECRET:dev_jwt_secret_key_change_in_production_minimum_32_characters}
+    secret: ${JWT_SECRET:CHANGE_THIS_JWT_SECRET_MIN_32_CHARS}
     expiration: 86400000 # 24 hours
     refresh-expiration: 604800000 # 7 days
   

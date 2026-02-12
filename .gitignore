@@ -52,3 +52,46 @@ DEVELOPER_BACKLOG.md
 docs/private/
 start.sh
 BACKLOG.md
+
+# Security - Sensitive files
+*.key
+*.pem
+*.crt
+*.p12
+*.jks
+keystore*
+*.pkcs12
+id_rsa*
+id_ed25519*
+*.pfx
+
+# Secrets and credentials
+secrets/
+*.secret
+*.private
+credentials/
+.aws/
+.azure/
+.kube/
+
+# Configuration files with sensitive data
+application-prod.yml
+application-local.yml
+config/local.properties
+config/production.properties
+
+# Build and deployment secrets
+docker-compose.override.yml
+.env.production
+.env.staging
+.env.local
+
+# Backup files
+*.backup
+*.bak
+*.sql.backup
+
+# Runtime files that may contain session data
+sessions/
+uploads/
+*.session
