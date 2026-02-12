@@ -77,8 +77,6 @@ const PromotionsCarousel: React.FC = () => {
     return () => clearInterval(interval);
   }, [isAutoPlaying, nextSlide]);
 
-  const currentPromotion = promotions[currentSlide];
-
   return (
     <div className={styles.carouselContainer}>
       <div className={styles.carousel}>
