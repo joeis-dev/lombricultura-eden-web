@@ -25,10 +25,10 @@
   pointer-events: none;
 }
 
-/* Button Variants */
+/* Button Variants - All text uses foreground color for consistency */
 .button--primary {
   background-color: var(--color-primary);
-  color: white;
+  color: var(--color-button-text);
   border-color: var(--color-primary);
 }
 
@@ -39,7 +39,7 @@
 
 .button--secondary {
   background-color: transparent;
-  color: var(--color-secondary);
+  color: var(--color-button-text);
   border-color: var(--color-border);
 }
 
@@ -50,18 +50,18 @@
 
 .button--outline {
   background-color: transparent;
-  color: var(--color-primary);
+  color: var(--color-button-text);
   border-color: var(--color-primary);
 }
 
 .button--outline:hover:not(:disabled) {
   background-color: var(--color-primary);
-  color: white;
+  color: var(--color-button-text);
 }
 
 .button--ghost {
   background-color: transparent;
-  color: var(--color-primary);
+  color: var(--color-button-text);
   border-color: transparent;
 }
 
@@ -71,7 +71,7 @@
 
 .button--danger {
   background-color: var(--color-error);
-  color: white;
+  color: var(--color-button-text);
   border-color: var(--color-error);
 }
 

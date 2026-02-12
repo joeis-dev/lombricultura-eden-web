@@ -154,12 +154,26 @@
   --color-accent-red-hover: #FF6B6B;
   --color-accent-red-light: #FFCDD2;
   
-  /* Interactive Elements */
+  /* Interactive Elements - All button text uses foreground color */
   --color-input-bg: #2D3E2D;
   --color-input-border: #1E3A1A;
   --color-input-focus: #4CAF50;
   --color-button-hover: #3A4B39;
   --color-button-active: #4CAF50;
+  --color-button-text: #F8F8F2;
+  
+  /* Button variants - all use foreground text for consistency */
+  --color-button-primary-bg: #3E2723;
+  --color-button-primary-text: #F8F8F2;
+  --color-button-secondary-bg: #2D5A27;
+  --color-button-secondary-text: #F8F8F2;
+  --color-button-accent-bg: #FF5555;
+  --color-button-accent-text: #F8F8F2;
+  
+  /* Legacy brown colors replaced with foreground */
+  --color-brown: #F8F8F2;
+  --color-brown-light: #F8F8F2;
+  --color-brown-muted: #E8DCC0;
   
   /* Shimmer/Loading States */
   --color-shimmer: #2D3E2D;
@@ -175,6 +189,22 @@
   --color-placeholder: #6B7B6B;
   --code-bg: #1E3A1A;
   --code-text: #A8DABA;
+}
+
+/* Dark Green Theme - Button Text Overrides */
+[data-theme="dark-green"] .button,
+[data-theme="dark-green"] .button--primary,
+[data-theme="dark-green"] .button--secondary,
+[data-theme="dark-green"] .button--outline,
+[data-theme="dark-green"] .button--ghost,
+[data-theme="dark-green"] .button--danger {
+  color: #F8F8F2 !important;
+}
+
+/* Ensure all brown-colored text uses foreground */
+[data-theme="dark-green"] .text-brown,
+[data-theme="dark-green"] [class*="brown"] {
+  color: #F8F8F2 !important;
 }
 
 /* Legacy Dark Theme (for fallback) */
