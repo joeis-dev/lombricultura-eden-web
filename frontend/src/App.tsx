@@ -231,9 +231,8 @@ function App() {
                 } 
               />
             </Routes>
-          </Suspense>
             </Suspense>
-          </Layout>
+        </Layout>
         </Router>
       </ErrorBoundary>
     </ThemeProvider>
