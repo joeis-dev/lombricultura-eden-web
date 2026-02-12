@@ -26,12 +26,12 @@ interface ThemeProviderProps {
 
 export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
   const [theme, setThemeState] = useState<Theme>(() => {
-    // Get theme from localStorage or default to light
+    // Get theme from localStorage or default to dark-green
     const savedTheme = localStorage.getItem(THEME_STORAGE_KEY) as Theme;
     if (savedTheme && ['light', 'dark', 'dark-green'].includes(savedTheme)) {
       return savedTheme;
     }
-    return 'light';
+    return 'dark-green'; // Dark green is now default
   });
 
   const setTheme = (newTheme: Theme) => {
