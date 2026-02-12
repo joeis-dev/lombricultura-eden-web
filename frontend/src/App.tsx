@@ -23,7 +23,7 @@ const ProductManager = React.lazy(() => import('@pages/Seller/ProductManager/Pro
 // Loading fallback for lazy loaded components
 const PageLoading = () => (
   <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '60vh' }}>
-    <Loading size="lg" text="Loading page..." />
+    <Loading size="lg" text="Cargando página..." />
   </div>
 );
 
@@ -150,8 +150,8 @@ function App() {
                 element={
                   <ProtectedRoute requiredRole="ADMIN">
                     <div style={{ padding: '2rem', textAlign: 'center' }}>
-                      <h1>Admin Panel</h1>
-                      <p>Admin functionality coming soon...</p>
+                    <h1>Panel Administrador</h1>
+                    <p>Funcionalidad de administrador próximamente...</p>
                     </div>
                   </ProtectedRoute>
                 } 
@@ -162,8 +162,8 @@ function App() {
                 path="/about" 
                 element={
                   <div style={{ padding: '2rem', textAlign: 'center' }}>
-                    <h1>About Us</h1>
-                    <p>Learn more about our company...</p>
+                      <h1>Acerca de Nosotros</h1>
+                      <p>Conoce más sobre nuestra empresa...</p>
                   </div>
                 } 
               />
@@ -172,8 +172,8 @@ function App() {
                 path="/contact" 
                 element={
                   <div style={{ padding: '2rem', textAlign: 'center' }}>
-                    <h1>Contact Us</h1>
-                    <p>Get in touch with our team...</p>
+                      <h1>Contacto</h1>
+                      <p>Comunícate con nuestro equipo...</p>
                   </div>
                 } 
               />
@@ -182,8 +182,8 @@ function App() {
                 path="/faq" 
                 element={
                   <div style={{ padding: '2rem', textAlign: 'center' }}>
-                    <h1>Frequently Asked Questions</h1>
-                    <p>Find answers to common questions...</p>
+                      <h1>Preguntas Frecuentes</h1>
+                      <p>Encuentra respuestas a preguntas comunes...</p>
                   </div>
                 } 
               />
@@ -212,7 +212,7 @@ function App() {
                         marginRight: '1rem'
                       }}
                     >
-                      Go Back
+                      Regresar
                     </button>
                     <button 
                       onClick={() => window.location.href = '/'}
@@ -225,7 +225,7 @@ function App() {
                         cursor: 'pointer'
                       }}
                     >
-                      Go Home
+                      Ir al Inicio
                     </button>
                   </div>
                 } 
