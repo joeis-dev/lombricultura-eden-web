@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Card, Button, Loading } from '@components/common';
 import ProductCard from '@components/product/ProductCard';
+import PromotionsCarousel from '@components/home/PromotionsCarousel/PromotionsCarousel';
 import type { Product } from '@app-types/index';
 import styles from './Home.module.css';
 
@@ -20,40 +21,12 @@ const Home: React.FC = () => {
           {
             id: '1',
             sellerId: 'seller-1',
-            title: 'Premium Wireless Headphones',
-            description: 'High-quality wireless headphones with noise cancellation and premium sound quality.',
-            price: 199.99,
-            stock: 15,
-            category: 'Electronics',
-            imageUrls: ['https://picsum.photos/400/400?random=1'],
-            isActive: true,
-            isFeatured: true,
-            createdAt: new Date().toISOString(),
-            updatedAt: new Date().toISOString()
-          },
-          {
-            id: '3',
-            sellerId: 'seller-2',
-            title: 'Smart Home Security Camera',
-            description: 'WiFi-enabled security camera with night vision and mobile app control.',
-            price: 149.99,
-            stock: 3,
-            category: 'Electronics',
-            imageUrls: ['https://picsum.photos/400/400?random=3'],
-            isActive: true,
-            isFeatured: true,
-            createdAt: new Date().toISOString(),
-            updatedAt: new Date().toISOString()
-          },
-          {
-            id: '6',
-            sellerId: 'seller-3',
-            title: 'JavaScript Programming Guide',
-            description: 'Comprehensive guide to modern JavaScript programming with examples.',
-            price: 34.99,
-            stock: 100,
-            category: 'Books',
-            imageUrls: ['https://picsum.photos/400/400?random=6'],
+            title: 'Humus de Lombriz Premium 5kg',
+            description: 'Fertilizante orgánico 100% natural, rico en nutrientes esenciales para plantas saludables. Ideal para huertos y jardines.',
+            price: 249.99,
+            stock: 50,
+            category: 'Humus de Lombriz',
+            imageUrls: ['https://picsum.photos/400/400?random=humus1'],
             isActive: true,
             isFeatured: true,
             createdAt: new Date().toISOString(),
@@ -62,12 +35,40 @@ const Home: React.FC = () => {
           {
             id: '2',
             sellerId: 'seller-1',
-            title: 'Organic Cotton T-Shirt',
-            description: 'Comfortable and sustainable t-shirt made from 100% organic cotton.',
-            price: 29.99,
-            stock: 50,
-            category: 'Clothing',
-            imageUrls: ['https://picsum.photos/400/400?random=2'],
+            title: 'Lombrices Rojas Californianas - 500uds',
+            description: 'Criadero de lombrices rojas californianas de alta calidad para compostaje doméstico. Incluye manual de cuidados.',
+            price: 199.99,
+            stock: 30,
+            category: 'Lombrices',
+            imageUrls: ['https://picsum.photos/400/400?random=worms1'],
+            isActive: true,
+            isFeatured: true,
+            createdAt: new Date().toISOString(),
+            updatedAt: new Date().toISOString()
+          },
+          {
+            id: '3',
+            sellerId: 'seller-2',
+            title: 'Kit de Compostaje Doméstico',
+            description: 'Todo lo necesario para iniciar tu compostador en casa. Incluye lombrices, sustrato, guía completa y contenedor.',
+            price: 599.99,
+            stock: 15,
+            category: 'Kits de Compostaje',
+            imageUrls: ['https://picsum.photos/400/400?random=kit1'],
+            isActive: true,
+            isFeatured: true,
+            createdAt: new Date().toISOString(),
+            updatedAt: new Date().toISOString()
+          },
+          {
+            id: '4',
+            sellerId: 'seller-2',
+            title: 'Humus Líquido - Extracto de Lombriz 1L',
+            description: 'Fertilizante líquido concentrado de fácil aplicación. Resultados visibles en 7 días.',
+            price: 129.99,
+            stock: 75,
+            category: 'Fertilizantes Líquidos',
+            imageUrls: ['https://picsum.photos/400/400?random=liquid1'],
             isActive: true,
             isFeatured: true,
             createdAt: new Date().toISOString(),
@@ -90,7 +91,7 @@ const Home: React.FC = () => {
   if (loading) {
     return (
       <div className={styles.loadingContainer}>
-        <Loading size="lg" text="Loading home page..." />
+        <Loading size="lg" text="Cargando Lombricultura Edén..." />
       </div>
     );
   }
@@ -99,9 +100,9 @@ const Home: React.FC = () => {
     return (
       <div className={styles.errorContainer}>
         <Card>
-          <h2>Welcome to Shop</h2>
+          <h2>Bienvenido a Lombricultura Edén</h2>
           <p>{error}</p>
-          <Button onClick={() => window.location.reload()}>Try Again</Button>
+          <Button onClick={() => window.location.reload()}>Intentar de Nuevo</Button>
         </Card>
       </div>
     );
@@ -109,35 +110,16 @@ const Home: React.FC = () => {
 
   return (
     <div className={styles.homePage}>
-      {/* Hero Section */}
-      <section className={styles.heroSection}>
-        <div className="container">
-          <div className={styles.heroContent}>
-            <h1 className={styles.heroTitle}>
-              Discover Amazing Products
-            </h1>
-            <p className={styles.heroSubtitle}>
-              Shop our curated collection of quality products from trusted sellers
-            </p>
-            <div className={styles.heroActions}>
-              <Button size="lg" onClick={() => window.location.href = '/products'}>
-                Shop Now
-              </Button>
-              <Button variant="outline" size="lg">
-                Learn More
-              </Button>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* Promotions Carousel */}
+      <PromotionsCarousel />
 
       {/* Featured Products */}
       <section className={styles.featuredSection}>
         <div className="container">
           <div className={styles.sectionHeader}>
-            <h2 className={styles.sectionTitle}>Featured Products</h2>
+            <h2 className={styles.sectionTitle}>Productos Destacados</h2>
             <p className={styles.sectionSubtitle}>
-              Hand-picked products we think you'll love
+              Los favoritos de nuestros clientes para un jardín próspero
             </p>
           </div>
           
@@ -156,9 +138,9 @@ const Home: React.FC = () => {
             <div className={styles.noProducts}>
               <Card>
                 <div style={{ textAlign: 'center', padding: '2rem' }}>
-                  <h3>No featured products available</h3>
+                  <h3>No hay productos destacados disponibles</h3>
                   <Button onClick={() => window.location.href = '/products'}>
-                    Browse All Products
+                    Ver Todos los Productos
                   </Button>
                 </div>
               </Card>
@@ -167,7 +149,7 @@ const Home: React.FC = () => {
           
           <div className={styles.viewAllButton}>
             <Button variant="outline" onClick={() => window.location.href = '/products'}>
-              View All Products
+              Ver Catálogo Completo
             </Button>
           </div>
         </div>
@@ -178,24 +160,24 @@ const Home: React.FC = () => {
         <div className="container">
           <div className={styles.featuresGrid}>
             <div className={styles.featureCard}>
+              <div className={styles.featureIcon}>🌱</div>
+              <h3>100% Orgánico</h3>
+              <p>Productos naturales sin químicos sintéticos</p>
+            </div>
+            <div className={styles.featureCard}>
+              <div className={styles.featureIcon}>♻️</div>
+              <h3>Sustentable</h3>
+              <p>Compostaje que ayuda al medio ambiente</p>
+            </div>
+            <div className={styles.featureCard}>
               <div className={styles.featureIcon}>🚚</div>
-              <h3>Fast Shipping</h3>
-              <p>Free shipping on orders over $50</p>
+              <h3>Envío Rápido</h3>
+              <p>Entrega en 24-48 horas a todo México</p>
             </div>
             <div className={styles.featureCard}>
-              <div className={styles.featureIcon}>🔒</div>
-              <h3>Secure Payment</h3>
-              <p>Safe and secure payment processing</p>
-            </div>
-            <div className={styles.featureCard}>
-              <div className={styles.featureIcon}>↩️</div>
-              <h3>Easy Returns</h3>
-              <p>30-day return policy on all items</p>
-            </div>
-            <div className={styles.featureCard}>
-              <div className={styles.featureIcon}>🎧</div>
-              <h3>24/7 Support</h3>
-              <p>Customer support around the clock</p>
+              <div className={styles.featureIcon}>📚</div>
+              <h3>Asesoría Experta</h3>
+              <p>Guías y soporte para tu lombricultura</p>
             </div>
           </div>
         </div>
@@ -205,20 +187,20 @@ const Home: React.FC = () => {
       <section className={styles.categoriesSection}>
         <div className="container">
           <div className={styles.sectionHeader}>
-            <h2 className={styles.sectionTitle}>Shop by Category</h2>
+            <h2 className={styles.sectionTitle}>Categorías</h2>
             <p className={styles.sectionSubtitle}>
-              Explore our wide range of product categories
+              Explora nuestra línea de productos para lombricultura
             </p>
           </div>
           
           <div className={styles.categoriesGrid}>
             {[
-              { name: 'Electronics', icon: '📱', count: 245 },
-              { name: 'Clothing', icon: '👕', count: 189 },
-              { name: 'Home & Garden', icon: '🏠', count: 156 },
-              { name: 'Sports & Outdoors', icon: '⚽', count: 98 },
-              { name: 'Books', icon: '📚', count: 267 },
-              { name: 'Toys & Games', icon: '🎮', count: 134 }
+              { name: 'Humus de Lombriz', icon: '🌿', count: 12 },
+              { name: 'Lombrices', icon: '🪱', count: 5 },
+              { name: 'Kits de Compostaje', icon: '📦', count: 8 },
+              { name: 'Fertilizantes', icon: '💧', count: 15 },
+              { name: 'Contenedores', icon: '🏠', count: 6 },
+              { name: 'Accesorios', icon: '🛠️', count: 20 }
             ].map(category => (
               <div 
                 key={category.name}
@@ -227,7 +209,7 @@ const Home: React.FC = () => {
               >
                 <div className={styles.categoryIcon}>{category.icon}</div>
                 <h4>{category.name}</h4>
-                <span className={styles.categoryCount}>{category.count} products</span>
+                <span className={styles.categoryCount}>{category.count} productos</span>
               </div>
             ))}
           </div>
@@ -238,16 +220,16 @@ const Home: React.FC = () => {
       <section className={styles.newsletterSection}>
         <div className="container">
           <div className={styles.newsletterContent}>
-            <h2>Stay Updated</h2>
-            <p>Subscribe to our newsletter for exclusive offers and new product updates</p>
+            <h2>Únete a la Comunidad Edén</h2>
+            <p>Recibe tips de lombricultura, ofertas exclusivas y novedades directo en tu correo</p>
             <form className={styles.newsletterForm} onSubmit={(e) => e.preventDefault()}>
               <input
                 type="email"
-                placeholder="Enter your email"
+                placeholder="Tu correo electrónico"
                 className={styles.newsletterInput}
                 required
               />
-              <Button type="submit">Subscribe</Button>
+              <Button type="submit">Suscribirme</Button>
             </form>
           </div>
         </div>
