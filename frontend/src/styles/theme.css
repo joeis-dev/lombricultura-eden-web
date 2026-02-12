@@ -121,31 +121,32 @@
   --color-surface: #2D3E2D;
   --color-surface-alt: #243423;
   
-  --color-text: #FFF8E1;
-  --color-text-secondary: #E8DCC0;
-  --color-text-muted: #B8A968;
+  /* ALL TEXT USES FOREGROUND COLOR - No brown text */
+  --color-text: #F8F8F2;
+  --color-text-secondary: #F8F8F2;
+  --color-text-muted: #E8DCC0;
   --color-text-inverse: #2D5A27;
   
   --color-border: #1E3A1A;
   --color-border-light: #2D3E2D;
   --color-border-subtle: #3A4B39;
   
-  /* Enhanced Status Colors with better contrast */
+  /* Enhanced Status Colors with better contrast - ALL TEXT USES FOREGROUND */
   --color-success: #4CAF50;
   --color-success-bg: #1B3A1B;
-  --color-success-text: #E8F5E8;
+  --color-success-text: #F8F8F2;
   
   --color-warning: #FFB74D;
   --color-warning-bg: #3A2E1F;
-  --color-warning-text: #FFF8DC;
+  --color-warning-text: #F8F8F2;
   
   --color-error: #F44336;
   --color-error-bg: #3E2723;
-  --color-error-text: #FFCDD2;
+  --color-error-text: #F8F8F2;
   
   --color-info: #2196F3;
   --color-info-bg: #1A237E;
-  --color-info-text: #BBDEFB;
+  --color-info-text: #F8F8F2;
   
   /* Additional UI Colors */
   --color-dark-bg: #282A36;
@@ -199,6 +200,17 @@
 [data-theme="dark-green"] .button--ghost,
 [data-theme="dark-green"] .button--danger {
   color: #F8F8F2 !important;
+}
+
+/* GLOBAL OVERRIDE: ALL text uses foreground color, never brown */
+[data-theme="dark-green"] * {
+  color: #F8F8F2 !important;
+}
+
+/* Exceptions for specific elements that need different colors */
+[data-theme="dark-green"] .text-muted,
+[data-theme="dark-green"] .text-secondary {
+  color: #E8DCC0 !important;
 }
 
 /* Ensure all brown-colored text uses foreground */
