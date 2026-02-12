@@ -4,7 +4,7 @@ import { ErrorBoundary } from '@components/common';
 import { Layout } from '@components/layout';
 import { useAuthStore } from '@store/authStore';
 import Loading from '@components/common/Loading';
-import { ThemeProvider } from '@contexts/ThemeContext';
+import { ThemeProvider } from './contexts/ThemeContext';
 
 // Lazy load pages for better performance
 const Home = React.lazy(() => import('@pages/Home/Home'));
