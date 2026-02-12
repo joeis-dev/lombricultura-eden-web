@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card } from '@components/common';
-import ThemeSwitcher from '../../../common/ThemeSwitcher/ThemeSwitcher';
+import ThemeSwitcher from '../../../components/common/ThemeSwitcher/ThemeSwitcher';
 import styles from './Dashboard.module.css';
 
 const Dashboard: React.FC = () => {

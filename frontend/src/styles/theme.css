@@ -147,6 +147,13 @@
   --color-info-bg: #1A237E;
   --color-info-text: #BBDEFB;
   
+  /* Additional UI Colors */
+  --color-dark-bg: #282A36;
+  --color-dark-fg: #F8F8F2;
+  --color-accent-red: #FF5555;
+  --color-accent-red-hover: #FF6B6B;
+  --color-accent-red-light: #FFCDD2;
+  
   /* Interactive Elements */
   --color-input-bg: #2D3E2D;
   --color-input-border: #1E3A1A;
