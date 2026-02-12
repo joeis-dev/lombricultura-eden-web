@@ -424,3 +424,18 @@
   background-color: var(--color-primary);
   border-color: var(--color-primary);
 }
+
+/* Dark Green theme support */
+[data-theme="dark-green"] .placeholderImage {
+  background-color: var(--color-surface-alt);
+}
+
+[data-theme="dark-green"] .quickActionButton {
+  background-color: var(--color-surface);
+  border-color: var(--color-border);
+}
+
+[data-theme="dark-green"] .quickActionButton:hover {
+  background-color: var(--color-secondary);
+  border-color: var(--color-secondary);
+}

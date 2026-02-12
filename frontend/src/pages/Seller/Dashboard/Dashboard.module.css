@@ -2,3 +2,73 @@
   min-height: 60vh;
   padding: var(--space-6) 0;
 }
+
+.dashboardPage > .container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.themeControls {
+  text-align: center;
+  padding: var(--space-6);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  margin-bottom: var(--space-6);
+  transition: all var(--transition-normal);
+}
+
+.themeControls:hover {
+  border-color: var(--color-secondary);
+  box-shadow: var(--shadow-md);
+}
+
+.themeTitle {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text);
+  margin-bottom: var(--space-3);
+}
+
+.themeDescription {
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-relaxed);
+  margin-bottom: var(--space-6);
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Theme Switcher styling in admin context */
+.themeControls .theme-switcher {
+  justify-content: center;
+  padding: var(--space-4);
+  border-radius: var(--radius-md);
+  background: var(--color-surface-alt);
+}
+
+.themeControls .theme-switcher button {
+  min-width: 140px;
+  padding: var(--space-3) var(--space-4);
+  font-size: var(--font-size-sm);
+  border-width: 2px;
+  transition: all var(--transition-normal);
+}
+
+.themeControls .theme-switcher button:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Dark theme support */
+[data-theme="dark"] .themeControls,
+[data-theme="dark-green"] .themeControls {
+  background: var(--color-surface);
+  border-color: var(--color-border);
+}
+
+[data-theme="dark"] .themeControls .themeDescription,
+[data-theme="dark-green"] .themeControls .themeDescription {
+  color: var(--color-text-secondary);
+}
