@@ -1,12 +1,10 @@
 /* Header Component Styles */
 .header {
-  background-color: var(--color-background);
-  border-bottom: 1px solid var(--color-border);
+  background-color: transparent;
   position: sticky;
   top: 0;
   z-index: var(--z-sticky);
   backdrop-filter: blur(8px);
-  background-color: rgba(255, 255, 255, 0.95);
   box-shadow: var(--shadow-sm);
 }
 
@@ -26,14 +24,14 @@
   text-decoration: none;
   font-weight: var(--font-weight-bold);
   font-size: var(--font-size-xl);
-  color: var(--color-primary);
+  color: #FFFFFF;
   transition: opacity var(--transition-normal);
 }
 
 .logo:hover {
   opacity: 0.8;
   text-decoration: none;
-  color: var(--color-primary);
+  color: #FFFFFF;
 }
 
 .logoImage {
@@ -45,6 +43,7 @@
 .logoText {
   font-weight: var(--font-weight-bold);
   font-size: var(--font-size-xl);
+  color: #FFFFFF;
 }
 
 /* Navigation */
@@ -55,7 +54,7 @@
 }
 
 .navLink {
-  color: var(--color-text-secondary);
+  color: #FFFFFF;
   text-decoration: none;
   font-weight: var(--font-weight-medium);
   font-size: var(--font-size-base);
@@ -66,14 +65,12 @@
 }
 
 .navLink:hover {
-  color: var(--color-primary);
-  background-color: var(--color-primary-light);
+  color: #FFFFFF;
   text-decoration: none;
 }
 
 .navLink.active {
-  color: var(--color-primary);
-  background-color: var(--color-primary-light);
+  color: #FFFFFF;
 }
 
 .navLink.active::after {
@@ -83,7 +80,32 @@
   left: 0;
   right: 0;
   height: 2px;
-  background-color: var(--color-primary);
+  background-color: #FFFFFF;
+  animation: slideIn 0.3s ease-out;
+}
+
+.navLink::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: #FFFFFF;
+  transition: width 0.3s ease-out;
+}
+
+.navLink:hover::after {
+  width: 100%;
+}
+
+@keyframes slideIn {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
 }
 
 /* Header Actions */
@@ -152,7 +174,6 @@
 
 .cartButton:hover {
   color: var(--color-primary);
-  background-color: var(--color-primary-light);
   text-decoration: none;
 }
 
@@ -195,7 +216,6 @@
 }
 
 .userButton:hover {
-  background-color: var(--color-surface);
   border-color: var(--color-secondary);
 }
 
@@ -281,15 +301,15 @@
 }
 
 .authButtonSecondary {
-  background-color: transparent;
-  color: var(--color-text);
-  border-color: var(--color-border);
+  background-color: var(--color-primary);
+  color: #FFFFFF;
+  border-color: var(--color-primary);
 }
 
 .authButtonSecondary:hover {
-  background-color: var(--color-surface);
-  border-color: var(--color-secondary);
-  color: var(--color-text);
+  background-color: var(--color-primary-hover);
+  border-color: var(--color-primary-hover);
+  color: #FFFFFF;
   text-decoration: none;
 }
 
@@ -303,11 +323,11 @@
   cursor: pointer;
   padding: var(--space-2);
   border-radius: var(--radius-md);
-  transition: background-color var(--transition-normal);
+  transition: color var(--transition-normal);
 }
 
 .mobileMenuToggle:hover {
-  background-color: var(--color-surface);
+  color: var(--color-primary);
 }
 
 /* Responsive Design */
@@ -457,13 +477,11 @@
 
 /* Dark theme support */
 [data-theme="dark"] .header {
-  background-color: rgba(17, 24, 39, 0.95);
-  border-bottom-color: var(--color-border);
+  background-color: transparent;
 }
 
 [data-theme="dark-green"] .header {
-  background-color: var(--color-surface);
-  border-bottom-color: var(--color-border);
+  background-color: rgba(45, 62, 45, 0.7);
 }
 
 [data-theme="dark"] .searchInput {
@@ -478,7 +496,7 @@
 }
 
 [data-theme="dark"] .dropdownItem:hover {
-  background-color: var(--color-surface-alt);
+  color: var(--color-primary);
 }
 
 [data-theme="dark"] .nav {

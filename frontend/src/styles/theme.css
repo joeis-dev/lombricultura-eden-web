@@ -8,7 +8,7 @@
   --color-secondary-hover: #4b5563;
   --color-secondary-light: #f3f4f6;
   
-  --color-accent: #10b981;
+  --color-accent: #4bd200;
   --color-accent-hover: #059669;
   --color-accent-light: #d1fae5;
   
@@ -24,7 +24,7 @@
   --color-border-light: #f3f4f6;
   
   /* Status Colors */
-  --color-success: #10b981;
+  --color-success: #4bd200;
   --color-warning: #f59e0b;
   --color-error: #ef4444;
   --color-info: #3b82f6;
@@ -103,93 +103,97 @@
   --container-2xl: 1536px;
 }
 
-/* Dark Green Theme - Enhanced for better UI/UX */
+/* Fresh Growth Theme - Green primary with brown & red secondary */
 [data-theme="dark-green"] {
-  --color-primary: #3E2723;
-  --color-primary-hover: #4A342A;
-  --color-primary-light: #5C4033;
+  --color-primary: #2E8B57;
+  --color-primary-hover: #3CB371;
+  --color-primary-light: #90EE90;
   
-  --color-secondary: #2D5A27;
-  --color-secondary-hover: #1E3A1A;
-  --color-secondary-light: #3A5B34;
+  --color-secondary: #8B4513;
+  --color-secondary-hover: #A0522D;
+  --color-secondary-light: #CD853F;
   
-  --color-accent: #FFF8E1;
-  --color-accent-hover: #F0E6CC;
-  --color-accent-light: #FFFFFF;
+  --color-accent: #DC143C;
+  --color-accent-hover: #B22222;
+  --color-accent-light: #F08080;
   
-  --color-background: #1A2E1A;
-  --color-surface: #2D3E2D;
-  --color-surface-alt: #243423;
+  --color-background: #F0FFF0;
+  --color-surface: #E8F5E9;
+  --color-surface-alt: #DCEDC8;
   
-  /* ALL TEXT USES FOREGROUND COLOR - No brown text */
-  --color-text: #F8F8F2;
-  --color-text-secondary: #F8F8F2;
-  --color-text-muted: #E8DCC0;
-  --color-text-inverse: #2D5A27;
+  /* Text colors for fresh growth theme */
+  --color-text: #1B5E20;
+  --color-text-secondary: #2E7D32;
+  --color-text-muted: #558B2F;
+  --color-text-inverse: #F0FFF0;
   
-  --color-border: #1E3A1A;
-  --color-border-light: #2D3E2D;
-  --color-border-subtle: #3A4B39;
+  --color-border: #A5D6A7;
+  --color-border-light: #C8E6C9;
+  --color-border-subtle: #E8F5E9;
   
-  /* Enhanced Status Colors with better contrast - ALL TEXT USES FOREGROUND */
-  --color-success: #4CAF50;
-  --color-success-bg: #1B3A1B;
-  --color-success-text: #F8F8F2;
+  /* Enhanced Status Colors */
+  --color-success: #2E8B57;
+  --color-success-bg: #A5D6A7;
+  --color-success-text: #F0FFF0;
   
-  --color-warning: #FFB74D;
-  --color-warning-bg: #3A2E1F;
-  --color-warning-text: #F8F8F2;
+  --color-warning: #FF8F00;
+  --color-warning-bg: #FFE082;
+  --color-warning-text: #1B5E20;
   
-  --color-error: #F44336;
-  --color-error-bg: #3E2723;
-  --color-error-text: #F8F8F2;
+  --color-error: #DC143C;
+  --color-error-bg: #FFCDD2;
+  --color-error-text: #F0FFF0;
   
-  --color-info: #2196F3;
-  --color-info-bg: #1A237E;
-  --color-info-text: #F8F8F2;
+  --color-info: #1976D2;
+  --color-info-bg: #BBDEFB;
+  --color-info-text: #F0FFF0;
   
   /* Additional UI Colors */
-  --color-dark-bg: #282A36;
-  --color-dark-fg: #F8F8F2;
-  --color-accent-red: #FF5555;
-  --color-accent-red-hover: #FF6B6B;
+  --color-dark-bg: #1B5E20;
+  --color-dark-fg: #F0FFF0;
+  --color-accent-red: #DC143C;
+  --color-accent-red-hover: #B22222;
   --color-accent-red-light: #FFCDD2;
   
-  /* Interactive Elements - All button text uses foreground color */
-  --color-input-bg: #2D3E2D;
-  --color-input-border: #1E3A1A;
-  --color-input-focus: #4CAF50;
-  --color-button-hover: #3A4B39;
-  --color-button-active: #4CAF50;
-  --color-button-text: #F8F8F2;
+  /* Interactive Elements */
+  --color-input-bg: #FFFFFF;
+  --color-input-border: #A5D6A7;
+  --color-input-focus: #2E8B57;
+  --color-button-hover: #3CB371;
+  --color-button-active: #2E8B57;
+  --color-button-text: #FFFFFF;
   
-  /* Button variants - all use foreground text for consistency */
-  --color-button-primary-bg: #3E2723;
-  --color-button-primary-text: #F8F8F2;
-  --color-button-secondary-bg: #2D5A27;
-  --color-button-secondary-text: #F8F8F2;
-  --color-button-accent-bg: #FF5555;
-  --color-button-accent-text: #F8F8F2;
+  /* Button variants - White text on colored backgrounds */
+  --color-button-primary-bg: #2E8B57;
+  --color-button-primary-text: #FFFFFF;
+  --color-button-secondary-bg: #8B4513;
+  --color-button-secondary-text: #FFFFFF;
+  --color-button-accent-bg: #DC143C;
+  --color-button-accent-text: #FFFFFF;
   
-  /* Legacy brown colors replaced with foreground */
-  --color-brown: #F8F8F2;
-  --color-brown-light: #F8F8F2;
-  --color-brown-muted: #E8DCC0;
+  /* Ensure white text on green/brown containers */
+  --color-text-on-primary: #FFFFFF;
+  --color-text-on-secondary: #FFFFFF;
+  
+  /* Earthy colors */
+  --color-brown: #8B4513;
+  --color-brown-light: #CD853F;
+  --color-brown-muted: #D2B48C;
   
   /* Shimmer/Loading States */
-  --color-shimmer: #2D3E2D;
-  --color-shimmer-light: #3A4B39;
+  --color-shimmer: #A5D6A7;
+  --color-shimmer-light: #C8E6C9;
   
   /* Discount/Sale badges */
-  --color-discount: #FF6B6B;
-  --color-discount-bg: #4E342E;
-  --color-new-badge: #66BB6A;
+  --color-discount: #DC143C;
+  --color-discount-bg: #FFCDD2;
+  --color-new-badge: #2E8B57;
   
   /* Additional semantic colors */
-  --color-disabled: #4A5B4A;
-  --color-placeholder: #6B7B6B;
-  --code-bg: #1E3A1A;
-  --code-text: #A8DABA;
+  --color-disabled: #C8E6C9;
+  --color-placeholder: #81C784;
+  --code-bg: #E8F5E9;
+  --code-text: #2E8B57;
 }
 
 /* Dark Green Theme - Button Text Overrides */
@@ -199,24 +203,26 @@
 [data-theme="dark-green"] .button--outline,
 [data-theme="dark-green"] .button--ghost,
 [data-theme="dark-green"] .button--danger {
-  color: #F8F8F2 !important;
+  color: #FFFFFF !important;
 }
 
-/* GLOBAL OVERRIDE: ALL text uses foreground color, never brown */
-[data-theme="dark-green"] * {
-  color: #F8F8F2 !important;
+/* White text on green/brown backgrounds */
+[data-theme="dark-green"] [class*="primary"],
+[data-theme="dark-green"] [class*="secondary"],
+[data-theme="dark-green"] .bg-primary,
+[data-theme="dark-green"] .bg-secondary,
+[data-theme="dark-green"] .button--primary,
+[data-theme="dark-green"] .button--secondary {
+  color: #FFFFFF !important;
 }
 
-/* Exceptions for specific elements that need different colors */
-[data-theme="dark-green"] .text-muted,
-[data-theme="dark-green"] .text-secondary {
-  color: #E8DCC0 !important;
-}
-
-/* Ensure all brown-colored text uses foreground */
-[data-theme="dark-green"] .text-brown,
-[data-theme="dark-green"] [class*="brown"] {
-  color: #F8F8F2 !important;
+[data-theme="dark-green"] [class*="primary"] *,
+[data-theme="dark-green"] [class*="secondary"] *,
+[data-theme="dark-green"] .bg-primary *,
+[data-theme="dark-green"] .bg-secondary *,
+[data-theme="dark-green"] .button--primary *,
+[data-theme="dark-green"] .button--secondary * {
+  color: #FFFFFF !important;
 }
 
 /* Legacy Dark Theme (for fallback) */
@@ -244,7 +250,7 @@ html {
   font-family: var(--font-family-primary);
   line-height: var(--line-height-normal);
   color: var(--color-text);
-  background-color: var(--color-background);
+  background-color: var(--color-text);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;

@@ -12,9 +12,9 @@ const Footer: React.FC = () => {
           <div className={styles.footerSections}>
             {/* Company Info */}
             <div className={styles.footerSection}>
-              <h3 className={styles.footerTitle}>Shop</h3>
+              <h3 className={styles.footerTitle}>Lombricultura Edén</h3>
               <p className={styles.footerDescription}>
-                Your trusted e-commerce platform for quality products and excellent service.
+                Tu plataforma de confianza para productos de lombricultura de alta calidad.
               </p>
               <div className={styles.socialLinks}>
                 <a href="#" className={styles.socialLink} aria-label="Facebook">
@@ -34,38 +34,38 @@ const Footer: React.FC = () => {
 
             {/* Quick Links */}
             <div className={styles.footerSection}>
-              <h4 className={styles.sectionTitle}>Quick Links</h4>
+              <h4 className={styles.sectionTitle}>Enlaces Rápidos</h4>
               <ul className={styles.linkList}>
                 <li>
-                  <a href="/products" className={styles.footerLink}>All Products</a>
+                  <a href="/products" className={styles.footerLink}>Todos los Productos</a>
                 </li>
                 <li>
-                  <a href="/about" className={styles.footerLink}>About Us</a>
+                  <a href="/about" className={styles.footerLink}>Acerca de Nosotros</a>
                 </li>
                 <li>
-                  <a href="/contact" className={styles.footerLink}>Contact</a>
+                  <a href="/contact" className={styles.footerLink}>Contacto</a>
                 </li>
                 <li>
-                  <a href="/faq" className={styles.footerLink}>FAQ</a>
+                  <a href="/faq" className={styles.footerLink}>Preguntas Frecuentes</a>
                 </li>
               </ul>
             </div>
 
             {/* Customer Service */}
             <div className={styles.footerSection}>
-              <h4 className={styles.sectionTitle}>Customer Service</h4>
+              <h4 className={styles.sectionTitle}>Servicio al Cliente</h4>
               <ul className={styles.linkList}>
                 <li>
-                  <a href="/shipping" className={styles.footerLink}>Shipping Info</a>
+                  <a href="/shipping" className={styles.footerLink}>Información de Envío</a>
                 </li>
                 <li>
-                  <a href="/returns" className={styles.footerLink}>Returns & Exchanges</a>
+                  <a href="/returns" className={styles.footerLink}>Devoluciones y Cambios</a>
                 </li>
                 <li>
-                  <a href="/size-guide" className={styles.footerLink}>Size Guide</a>
+                  <a href="/size-guide" className={styles.footerLink}>Guía de Tallas</a>
                 </li>
                 <li>
-                  <a href="/track-order" className={styles.footerLink}>Track Order</a>
+                  <a href="/track-order" className={styles.footerLink}>Rastrear Pedido</a>
                 </li>
               </ul>
             </div>
@@ -75,35 +75,35 @@ const Footer: React.FC = () => {
               <h4 className={styles.sectionTitle}>Legal</h4>
               <ul className={styles.linkList}>
                 <li>
-                  <a href="/privacy" className={styles.footerLink}>Privacy Policy</a>
+                  <a href="/privacy" className={styles.footerLink}>Política de Privacidad</a>
                 </li>
                 <li>
-                  <a href="/terms" className={styles.footerLink}>Terms of Service</a>
+                  <a href="/terms" className={styles.footerLink}>Términos del Servicio</a>
                 </li>
                 <li>
-                  <a href="/cookie-policy" className={styles.footerLink}>Cookie Policy</a>
+                  <a href="/cookie-policy" className={styles.footerLink}>Política de Cookies</a>
                 </li>
                 <li>
-                  <a href="/accessibility" className={styles.footerLink}>Accessibility</a>
+                  <a href="/accessibility" className={styles.footerLink}>Accesibilidad</a>
                 </li>
               </ul>
             </div>
 
             {/* Newsletter */}
             <div className={styles.footerSection}>
-              <h4 className={styles.sectionTitle}>Stay Updated</h4>
+              <h4 className={styles.sectionTitle}>Mantente Actualizado</h4>
               <p className={styles.newsletterDescription}>
-                Subscribe to get special offers and updates
+                Suscríbete para recibir ofertas especiales y novedades
               </p>
               <form className={styles.newsletterForm} onSubmit={(e) => e.preventDefault()}>
                 <input
                   type="email"
-                  placeholder="Enter your email"
+                  placeholder="Tu correo electrónico"
                   className={styles.newsletterInput}
                   required
                 />
                 <button type="submit" className={styles.newsletterButton}>
-                  Subscribe
+                  Suscribirme
                 </button>
               </form>
             </div>
@@ -113,17 +113,17 @@ const Footer: React.FC = () => {
           <div className={styles.footerBottom}>
             <div className={styles.footerBottomContent}>
               <p className={styles.copyright}>
-                © {currentYear} Shop. All rights reserved.
+                © {currentYear} Lombricultura Edén. Todos los derechos reservados.
               </p>
               
               <div className={styles.footerBottomLinks}>
-                <a href="/privacy" className={styles.bottomLink}>Privacy</a>
-                <a href="/terms" className={styles.bottomLink}>Terms</a>
-                <a href="/sitemap" className={styles.bottomLink}>Sitemap</a>
+                <a href="/privacy" className={styles.bottomLink}>Privacidad</a>
+                <a href="/terms" className={styles.bottomLink}>Términos</a>
+                <a href="/sitemap" className={styles.bottomLink}>Mapa del Sitio</a>
               </div>
-
+              
               <div className={styles.paymentMethods}>
-                <span className={styles.paymentLabel}>Accepted Payments:</span>
+                <span className={styles.paymentLabel}>Métodos de Pago Aceptados:</span>
                 <div className={styles.paymentIcons}>
                   <span className={styles.paymentIcon} title="Visa">💳</span>
                   <span className={styles.paymentIcon} title="Mastercard">💳</span>
@@ -132,6 +132,13 @@ const Footer: React.FC = () => {
                   <span className={styles.paymentIcon} title="Stripe">💳</span>
                 </div>
               </div>
+            </div>
+
+            {/* Developer Credit */}
+            <div className={styles.footerCredit}>
+              <p>
+                Desarrollado con ❤️ por <a href="https://github.com/joeis-dev" target="_blank" rel="noopener noreferrer" className={styles.creditLink}>Joe</a>
+              </p>
             </div>
           </div>
         </div>

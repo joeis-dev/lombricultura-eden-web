@@ -14,25 +14,25 @@
 .card--default {
   background-color: var(--color-background);
   border: 1px solid var(--color-border);
-  box-shadow: var(--shadow-sm);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .card--outlined {
   background-color: var(--color-background);
   border: 2px solid var(--color-border);
-  box-shadow: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .card--elevated {
   background-color: var(--color-background);
   border: 1px solid var(--color-border);
-  box-shadow: var(--shadow-lg);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
 }
 
 .card--flat {
   background-color: var(--color-surface);
   border: none;
-  box-shadow: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
 /* Padding */
@@ -83,8 +83,8 @@
 
 /* Modifiers */
 .card--hover:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-lg);
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
 }
 
 .card--clickable {
@@ -92,8 +92,8 @@
 }
 
 .card--clickable:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-lg);
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
 }
 
 .card--clickable:active {
@@ -216,13 +216,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.4),
-    transparent
-  );
-  animation: cardShimmer 1.5s infinite;
+  background-color: rgba(255, 255, 255, 0.4);
 }
 
 @keyframes cardShimmer {

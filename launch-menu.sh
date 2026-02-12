@@ -43,22 +43,40 @@ echo ""
 
 # Ask user what they want to do
 echo "What would you like to do?"
-echo "1) Start all services (Docker)"
-echo "2) Start backend only (local development)"
-echo "3) Start frontend only (local development)"
-echo "4) View logs"
-echo "5) Stop all services"
-echo "6) Rebuild the whole app (clean start)"
+echo "1) Start all services - DEV mode (Docker + hot reload)"
+echo "2) Start all services - PROD mode (Docker)"
+echo "3) Start backend only (local development)"
+echo "4) Start frontend only (local development)"
+echo "5) View logs"
+echo "6) Stop all services"
+echo "7) Rebuild the whole app - DEV mode (clean start)"
+echo "8) Rebuild the whole app - PROD mode (clean start)"
 echo ""
-read -p "Enter your choice (1-6): " choice
+read -p "Enter your choice (1-8): " choice
 
 case $choice in
     1)
         echo ""
-        echo "🐳 Starting all services with Docker..."
+        echo "🐳 Starting all services in DEV mode (hot reload enabled)..."
+        docker-compose -f docker-compose.yml -f docker-compose.dev.yml up -d
+        echo ""
+        echo "✅ Services started in DEV mode!"
+        echo ""
+        echo "Access points:"
+        echo "  Frontend: http://localhost:5173"
+        echo "  Backend:  http://localhost:8080"
+        echo "  API Docs: http://localhost:8080/swagger-ui.html (when implemented)"
+        echo "  Database: localhost:5432"
+        echo ""
+        echo "📝 Hot reload is enabled for frontend!"
+        echo "View logs with: docker-compose -f docker-compose.yml -f docker-compose.dev.yml logs -f"
+        ;;
+    2)
+        echo ""
+        echo "🐳 Starting all services in PROD mode..."
         docker-compose up -d
         echo ""
-        echo "✅ Services started!"
+        echo "✅ Services started in PROD mode!"
         echo ""
         echo "Access points:"
         echo "  Frontend: http://localhost:3000"
@@ -68,7 +86,7 @@ case $choice in
         echo ""
         echo "View logs with: docker-compose logs -f"
         ;;
-    2)
+    3)
         echo ""
         echo "☕ Starting backend (local development)..."
         cd backend
@@ -78,7 +96,7 @@ case $choice in
         fi
         ./mvnw spring-boot:run
         ;;
-    3)
+    4)
         echo ""
         echo "⚛️  Starting frontend (local development)..."
         cd frontend
@@ -93,20 +111,58 @@ case $choice in
         fi
         pnpm dev
         ;;
-    4)
-        echo ""
-        echo "📋 Viewing logs..."
-        docker-compose logs -f
-        ;;
     5)
         echo ""
-        echo "🛑 Stopping all services..."
-        docker-compose down
-        echo "✅ All services stopped"
+        echo "📋 Viewing logs..."
+        echo "Choose environment:"
+        echo "1) DEV mode"
+        echo "2) PROD mode"
+        read -p "Enter your choice (1-2): " log_choice
+        if [ "$log_choice" = "1" ]; then
+            docker-compose -f docker-compose.yml -f docker-compose.dev.yml logs -f
+        else
+            docker-compose logs -f
+        fi
         ;;
     6)
         echo ""
-        echo "⚠️  This will rebuild the whole project!"
+        echo "🛑 Stopping all services..."
+        docker-compose -f docker-compose.yml -f docker-compose.dev.yml down
+        docker-compose down
+        echo "✅ All services stopped"
+        ;;
+    7)
+        echo ""
+        echo "⚠️  This will rebuild the whole project in DEV mode!"
+        read -p "Are you sure? (yes/no): " confirm
+        if [ "$confirm" = "yes" ]; then
+            echo "🧹 Cleaning up..."
+            docker-compose -f docker-compose.yml -f docker-compose.dev.yml down -v
+            docker-compose down -v
+            rm -rf backend/target
+            rm -rf frontend/node_modules
+            rm -rf frontend/dist
+            echo "✅ Everything cleaned up"
+            sleep 1
+            echo "🐳 Starting all services in DEV mode..."
+            docker-compose -f docker-compose.yml -f docker-compose.dev.yml up --build -d
+            echo ""
+            echo "✅ Services were rebuilt in DEV mode!"
+            echo ""
+            echo "Access points:"
+            echo "  Frontend: http://localhost:5173"
+            echo "  Backend:  http://localhost:8080"
+            echo "  API Docs: http://localhost:8080/swagger-ui.html (when implemented)"
+            echo "  Database: localhost:5432"
+            echo ""
+            echo "📝 Hot reload is enabled for frontend!"
+        else
+            echo "Cancelled"
+        fi
+        ;;
+    8)
+        echo ""
+        echo "⚠️  This will rebuild the whole project in PROD mode!"
         read -p "Are you sure? (yes/no): " confirm
         if [ "$confirm" = "yes" ]; then
             echo "🧹 Cleaning up..."
@@ -116,10 +172,10 @@ case $choice in
             rm -rf frontend/dist
             echo "✅ Everything cleaned up"
             sleep 1
-            echo "🐳 Starting all services with Docker..."
+            echo "🐳 Starting all services in PROD mode..."
             docker-compose up --build -d
             echo ""
-            echo "✅ Services were rebuild!"
+            echo "✅ Services were rebuilt in PROD mode!"
             echo ""
             echo "Access points:"
             echo "  Frontend: http://localhost:3000"
