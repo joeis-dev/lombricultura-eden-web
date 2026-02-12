@@ -20,6 +20,9 @@ RUN ./mvnw clean package -DskipTests
 # Runtime stage
 FROM eclipse-temurin:21-jre-alpine
 
+# Install curl for health checks
+RUN apk add --no-cache curl
+
 WORKDIR /app
 
 # Create non-root user and uploads directory
