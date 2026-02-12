@@ -1,0 +1,4 @@
+.productDetailPage {
+  min-height: 60vh;
+  padding: var(--space-6) 0;
+}

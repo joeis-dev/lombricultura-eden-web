@@ -1,0 +1,104 @@
+@import './styles/theme.css';
+@import './styles/layout.css';
+@import './styles/components.css';
+
+/* Remove default browser styles and apply our design system */
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  display: block; /* Override flex centering from Vite template */
+  place-items: initial; /* Reset centering */
+}
+
+/* Remove Vite template styles that conflict */
+#root {
+  max-width: none; /* Remove max-width constraint */
+  margin: 0; /* Remove auto margin */
+  padding: 0; /* Remove padding */
+  text-align: left; /* Reset text alignment */
+}
+
+/* Clean up any remaining Vite template styles */
+.logo, .card, .read-the-docs {
+  display: none;
+}
+
+/* Global link styling that works with our design system */
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: color var(--transition-normal);
+}
+
+a:hover {
+  color: var(--color-primary-hover);
+  text-decoration: underline;
+}
+
+/* Ensure proper heading hierarchy */
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-tight);
+  color: var(--color-text);
+}
+
+h1 { font-size: var(--font-size-4xl); }
+h2 { font-size: var(--font-size-3xl); }
+h3 { font-size: var(--font-size-2xl); }
+h4 { font-size: var(--font-size-xl); }
+h5 { font-size: var(--font-size-lg); }
+h6 { font-size: var(--font-size-base); }
+
+/* Paragraph spacing */
+p {
+  margin: 0 0 var(--space-4) 0;
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-relaxed);
+}
+
+p:last-child {
+  margin-bottom: 0;
+}
+
+/* List styling */
+ul, ol {
+  margin: 0 0 var(--space-4) 0;
+  padding-left: var(--space-6);
+  color: var(--color-text-secondary);
+}
+
+li {
+  margin-bottom: var(--space-2);
+}
+
+/* Image responsiveness */
+img {
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--radius-md);
+}
+
+/* Focus visible for accessibility */
+*:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* Hide focus ring when using mouse */
+*:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Print styles */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  
+  body {
+    background: white !important;
+    color: black !important;
+  }
+}

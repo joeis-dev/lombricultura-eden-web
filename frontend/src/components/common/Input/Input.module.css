@@ -1,0 +1,251 @@
+/* Input Component Styles */
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.inputGroup--full-width {
+  width: 100%;
+}
+
+.label {
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-sm);
+  color: var(--color-text);
+  line-height: var(--line-height-tight);
+}
+
+.inputWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input {
+  width: 100%;
+  padding: var(--space-3) var(--space-4);
+  font-family: inherit;
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-normal);
+  color: var(--color-text);
+  background-color: var(--color-background);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  transition: all var(--transition-normal);
+  outline: none;
+}
+
+.input:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.input:disabled {
+  background-color: var(--color-surface);
+  color: var(--color-text-muted);
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.input:invalid:not(:placeholder-shown) {
+  border-color: var(--color-error);
+}
+
+.input::placeholder {
+  color: var(--color-text-muted);
+}
+
+/* Variants */
+.input--outlined {
+  background-color: transparent;
+  border: 2px solid var(--color-border);
+}
+
+.input--outlined:focus {
+  border-color: var(--color-primary);
+  box-shadow: none;
+  background-color: var(--color-background);
+}
+
+/* Sizes */
+.input--sm {
+  padding: var(--space-2) var(--space-3);
+  font-size: var(--font-size-sm);
+}
+
+.input--lg {
+  padding: var(--space-4) var(--space-5);
+  font-size: var(--font-size-lg);
+}
+
+/* Modifiers */
+.input--full-width {
+  width: 100%;
+}
+
+.input--error {
+  border-color: var(--color-error);
+}
+
+.input--error:focus {
+  border-color: var(--color-error);
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+}
+
+.input--has-left-icon {
+  padding-left: var(--space-10);
+}
+
+.input--has-right-icon {
+  padding-right: var(--space-10);
+}
+
+.input--has-left-icon.input--sm {
+  padding-left: var(--space-8);
+}
+
+.input--has-right-icon.input--sm {
+  padding-right: var(--space-8);
+}
+
+.input--has-left-icon.input--lg {
+  padding-left: var(--space-12);
+}
+
+.input--has-right-icon.input--lg {
+  padding-right: var(--space-12);
+}
+
+/* Icons */
+.iconLeft,
+.iconRight {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-muted);
+  pointer-events: none;
+  transition: color var(--transition-normal);
+}
+
+.iconLeft {
+  left: var(--space-3);
+}
+
+.iconRight {
+  right: var(--space-3);
+}
+
+.input:focus ~ .iconLeft,
+.input:focus ~ .iconRight {
+  color: var(--color-primary);
+}
+
+.input--error ~ .iconLeft,
+.input--error ~ .iconRight {
+  color: var(--color-error);
+}
+
+.input--sm .iconLeft {
+  left: var(--space-2);
+}
+
+.input--sm .iconRight {
+  right: var(--space-2);
+}
+
+.input--lg .iconLeft {
+  left: var(--space-4);
+}
+
+.input--lg .iconRight {
+  right: var(--space-4);
+}
+
+/* Error and Helper Text */
+.error,
+.helper {
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-normal);
+  margin-top: var(--space-1);
+}
+
+.error {
+  color: var(--color-error);
+  font-weight: var(--font-weight-medium);
+}
+
+.helper {
+  color: var(--color-text-muted);
+}
+
+/* Input types */
+.input[type="search"] {
+  padding-right: var(--space-10);
+}
+
+.input[type="date"],
+.input[type="time"],
+.input[type="datetime-local"] {
+  cursor: pointer;
+}
+
+/* Remove default browser styling for search */
+.input[type="search"]::-webkit-search-decoration,
+.input[type="search"]::-webkit-search-cancel-button,
+.input[type="search"]::-webkit-search-results-button,
+.input[type="search"]::-webkit-search-results-decoration {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+/* Number input styling */
+.input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.input[type="number"]::-webkit-outer-spin-button,
+.input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* File input styling */
+.input[type="file"] {
+  padding: var(--space-2);
+  cursor: pointer;
+}
+
+.input[type="file"]:hover {
+  background-color: var(--color-surface);
+}
+
+/* Password field with show/hide toggle */
+.inputPassword {
+  position: relative;
+}
+
+.inputPasswordToggle {
+  position: absolute;
+  right: var(--space-3);
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  padding: var(--space-1);
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-normal);
+}
+
+.inputPasswordToggle:hover {
+  background-color: var(--color-surface);
+  color: var(--color-primary);
+}
+
+.inputPasswordToggle:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}

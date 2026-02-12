@@ -1,0 +1,31 @@
+{
+  "brandName": "My Shop",
+  "primaryColor": "#3B82F6",
+  "secondaryColor": "#10B981",
+  "accentColor": "#F59E0B",
+  "backgroundColor": "#F9FAFB",
+  "textColor": "#111827",
+  "logo": "/branding/logo.svg",
+  "favicon": "/branding/favicon.ico",
+  "fonts": {
+    "heading": "Inter",
+    "body": "Roboto"
+  },
+  "features": {
+    "guestCheckout": true,
+    "userReviews": true,
+    "sellerPanel": true,
+    "whatsappNotifications": true,
+    "emailNotifications": true
+  },
+  "contact": {
+    "email": "contact@myshop.com",
+    "phone": "+1234567890",
+    "whatsapp": "+1234567890"
+  },
+  "social": {
+    "facebook": "",
+    "instagram": "",
+    "twitter": ""
+  }
+}
