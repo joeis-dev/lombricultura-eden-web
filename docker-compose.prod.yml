@@ -1,0 +1,51 @@
+services:
+  postgres:
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - /var/lib/postgresql/data:/var/lib/postgresql/data
+
+  backend:
+    restart: always
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/${DB_NAME}
+      SPRING_DATASOURCE_USERNAME: ${DB_USER}
+      SPRING_DATASOURCE_PASSWORD: ${DB_PASSWORD}
+      JWT_SECRET: ${JWT_SECRET}
+      STRIPE_API_KEY: ${STRIPE_API_KEY}
+      STRIPE_WEBHOOK_SECRET: ${STRIPE_WEBHOOK_SECRET}
+      SKYDROPX_API_KEY: ${SKYDROPX_API_KEY}
+      EMAIL_HOST: ${EMAIL_HOST}
+      EMAIL_PORT: ${EMAIL_PORT}
+      EMAIL_USERNAME: ${EMAIL_USERNAME}
+      EMAIL_PASSWORD: ${EMAIL_PASSWORD}
+      WHATSAPP_API_KEY: ${WHATSAPP_API_KEY}
+      CORS_ALLOWED_ORIGINS: ${CORS_ALLOWED_ORIGINS}
+    volumes:
+      - /var/app/uploads:/app/uploads
+
+  frontend:
+    restart: always
+    environment:
+      VITE_API_URL: ${VITE_API_URL}
+      VITE_STRIPE_PUBLIC_KEY: ${VITE_STRIPE_PUBLIC_KEY}
+      VITE_THEME_CONFIG: ${VITE_THEME_CONFIG}
+
+  nginx:
+    image: nginx:alpine
+    container_name: lombriculturaeden-nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/ssl:/etc/nginx/ssl:ro
+      - backend_uploads:/var/www/uploads:ro
+    depends_on:
+      - frontend
+      - backend
+    restart: always
+    networks:
+      - lombriculturaeden-network

@@ -1,0 +1,54 @@
+# IDE
+.idea/
+.vscode/
+*.iml
+*.iws
+*.ipr
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Logs
+*.log
+logs/
+
+# Dependencies
+node_modules/
+target/
+
+# Build outputs
+dist/
+build/
+*.jar
+*.war
+
+# Test coverage
+coverage/
+.nyc_output/
+
+# Docker
+*.pid
+*.seed
+*.pid.lock
+
+# Database
+*.db
+*.sqlite
+
+# Temporary files
+*.tmp
+*.temp
+.cache/
+
+# Private Documentation
+SRS.md
+DEVELOPER_BACKLOG.md
+docs/private/
+start.sh
+BACKLOG.md
