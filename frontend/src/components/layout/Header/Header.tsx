@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useAuthStore } from '@store/authStore';
 import { useCartStore } from '@store/cartStore';
+import ThemeSwitcher from '../../common/ThemeSwitcher/ThemeSwitcher';
 import styles from './Header.module.css';
 
 const Header: React.FC = () => {
@@ -77,6 +78,8 @@ const Header: React.FC = () => {
 
           {/* Actions */}
           <div className={styles.headerActions}>
+            {/* Theme Switcher */}
+            <ThemeSwitcher />
             {/* Search */}
             <div className={styles.searchContainer}>
               <input
