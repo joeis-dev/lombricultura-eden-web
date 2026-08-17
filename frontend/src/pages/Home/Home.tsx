@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Card, Button, Loading } from '@components/common';
 import ProductCard from '@components/product/ProductCard';
 import PromotionsCarousel from '@components/home/PromotionsCarousel/PromotionsCarousel';
+import { products } from '@data/products';
 import type { Product } from '@app-types/index';
 import styles from './Home.module.css';
 
@@ -10,73 +11,12 @@ const Home: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  // Mock fetch featured products
   useEffect(() => {
     const fetchFeaturedProducts = async () => {
       try {
         setLoading(true);
-        await new Promise(resolve => setTimeout(resolve, 800));
-        
-        const mockFeaturedProducts: Product[] = [
-          {
-            id: '1',
-            sellerId: 'seller-1',
-            title: 'Humus de Lombriz Premium 5kg',
-            description: 'Fertilizante orgánico 100% natural, rico en nutrientes esenciales para plantas saludables. Ideal para huertos y jardines.',
-            price: 249.99,
-            stock: 50,
-            category: 'Humus de Lombriz',
-            imageUrls: ['https://picsum.photos/400/400?random=humus1'],
-            isActive: true,
-            isFeatured: true,
-            createdAt: new Date().toISOString(),
-            updatedAt: new Date().toISOString()
-          },
-          {
-            id: '2',
-            sellerId: 'seller-1',
-            title: 'Lombrices Rojas Californianas - 500uds',
-            description: 'Criadero de lombrices rojas californianas de alta calidad para compostaje doméstico. Incluye manual de cuidados.',
-            price: 199.99,
-            stock: 30,
-            category: 'Lombrices',
-            imageUrls: ['https://picsum.photos/400/400?random=worms1'],
-            isActive: true,
-            isFeatured: true,
-            createdAt: new Date().toISOString(),
-            updatedAt: new Date().toISOString()
-          },
-          {
-            id: '3',
-            sellerId: 'seller-2',
-            title: 'Kit de Compostaje Doméstico',
-            description: 'Todo lo necesario para iniciar tu compostador en casa. Incluye lombrices, sustrato, guía completa y contenedor.',
-            price: 599.99,
-            stock: 15,
-            category: 'Kits de Compostaje',
-            imageUrls: ['https://picsum.photos/400/400?random=kit1'],
-            isActive: true,
-            isFeatured: true,
-            createdAt: new Date().toISOString(),
-            updatedAt: new Date().toISOString()
-          },
-          {
-            id: '4',
-            sellerId: 'seller-2',
-            title: 'Humus Líquido - Extracto de Lombriz 1L',
-            description: 'Fertilizante líquido concentrado de fácil aplicación. Resultados visibles en 7 días.',
-            price: 129.99,
-            stock: 75,
-            category: 'Fertilizantes Líquidos',
-            imageUrls: ['https://picsum.photos/400/400?random=liquid1'],
-            isActive: true,
-            isFeatured: true,
-            createdAt: new Date().toISOString(),
-            updatedAt: new Date().toISOString()
-          }
-        ];
-
-        setFeaturedProducts(mockFeaturedProducts);
+        await new Promise(resolve => setTimeout(resolve, 500));
+        setFeaturedProducts(products.filter(p => p.isFeatured));
       } catch (err) {
         setError('Failed to load featured products');
         console.error('Error fetching featured products:', err);

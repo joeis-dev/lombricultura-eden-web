@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Card } from '@components/common';
 import type { Product } from '@app-types/index';
+import { getMinPrice, getTotalStock } from '@data/products';
 import styles from './ProductCard.module.css';
 
 export interface ProductCardProps {
@@ -20,19 +21,20 @@ const ProductCard: React.FC<ProductCardProps> = ({
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    // TODO: Add to cart functionality
     console.log('Add to cart:', product.title);
   };
 
   const handleQuickView = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    // TODO: Quick view functionality
     console.log('Quick view:', product.title);
   };
 
-  const isOutOfStock = product.stock <= 0;
-  const isLowStock = product.stock > 0 && product.stock <= 5;
+  const hasVariants = product.variants && product.variants.length > 0;
+  const totalStock = getTotalStock(product);
+  const minPrice = getMinPrice(product);
+  const isOutOfStock = totalStock <= 0;
+  const isLowStock = totalStock > 0 && totalStock <= 5;
 
   return (
     <Card 
@@ -64,17 +66,17 @@ const ProductCard: React.FC<ProductCardProps> = ({
         <div className={styles.productBadges}>
           {isOutOfStock && (
             <span className={`${styles.badge} ${styles.badgeOutOfStock}`}>
-              Out of Stock
+              Agotado
             </span>
           )}
           {isLowStock && (
             <span className={`${styles.badge} ${styles.badgeLowStock}`}>
-              Only {product.stock} left
+              ¡Solo quedan {totalStock}!
             </span>
           )}
           {product.isFeatured && (
             <span className={`${styles.badge} ${styles.badgeFeatured}`}>
-              Featured
+              Destacado
             </span>
           )}
         </div>
@@ -135,11 +137,12 @@ const ProductCard: React.FC<ProductCardProps> = ({
         <div className={styles.productMeta}>
           <div className={styles.priceContainer}>
             <span className={styles.price}>
-              ${product.price.toFixed(2)}
+              {hasVariants ? 'Desde ' : ''}${minPrice.toLocaleString('es-MX', { minimumFractionDigits: 2 })}
             </span>
-            {product.stock > 0 && (
+            <span className={styles.currencyTag}>MXN</span>
+            {totalStock > 0 && (
               <span className={styles.stockInfo}>
-                In stock ({product.stock} available)
+                {totalStock} disponible{totalStock !== 1 ? 's' : ''}
               </span>
             )}
           </div>
@@ -153,7 +156,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
               onClick={handleAddToCart}
               disabled={isOutOfStock}
             >
-              {isOutOfStock ? 'Out of Stock' : 'Add to Cart'}
+              {isOutOfStock ? 'Agotado' : 'Agregar al Carrito'}
             </button>
           </div>
         )}

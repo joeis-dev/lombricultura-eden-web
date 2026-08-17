@@ -53,6 +53,7 @@ CREATE TABLE IF NOT EXISTS order_items (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
     order_id UUID REFERENCES orders(id) ON DELETE CASCADE,
     product_id UUID REFERENCES products(id),
+    variant_id UUID REFERENCES product_variants(id),
     quantity INTEGER NOT NULL CHECK (quantity > 0),
     price DECIMAL(10, 2) NOT NULL CHECK (price >= 0),
     product_snapshot JSONB,
@@ -103,7 +104,21 @@ CREATE TABLE IF NOT EXISTS cart_items (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
     cart_id UUID REFERENCES carts(id) ON DELETE CASCADE,
     product_id UUID REFERENCES products(id),
+    variant_id UUID REFERENCES product_variants(id),
     quantity INTEGER NOT NULL CHECK (quantity > 0),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Product variants (presentations)
+CREATE TABLE IF NOT EXISTS product_variants (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    product_id UUID REFERENCES products(id) ON DELETE CASCADE,
+    label VARCHAR(255) NOT NULL,
+    price DECIMAL(10, 2) NOT NULL CHECK (price >= 0),
+    stock INTEGER NOT NULL DEFAULT 0 CHECK (stock >= 0),
+    is_active BOOLEAN DEFAULT true,
+    sort_order INTEGER DEFAULT 0,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
@@ -131,6 +146,9 @@ CREATE INDEX IF NOT EXISTS idx_products_seller ON products(seller_id);
 CREATE INDEX IF NOT EXISTS idx_products_category ON products(category);
 CREATE INDEX IF NOT EXISTS idx_products_active ON products(is_active);
 CREATE INDEX IF NOT EXISTS idx_products_featured ON products(is_featured);
+
+CREATE INDEX IF NOT EXISTS idx_product_variants_product ON product_variants(product_id);
+CREATE INDEX IF NOT EXISTS idx_product_variants_active ON product_variants(is_active);
 
 CREATE INDEX IF NOT EXISTS idx_orders_user ON orders(user_id);
 CREATE INDEX IF NOT EXISTS idx_orders_guest_email ON orders(guest_email);

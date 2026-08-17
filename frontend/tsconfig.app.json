@@ -22,7 +22,21 @@
     "noUnusedParameters": true,
     "erasableSyntaxOnly": true,
     "noFallthroughCasesInSwitch": true,
-    "noUncheckedSideEffectImports": true
+    "noUncheckedSideEffectImports": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"],
+      "@components/*": ["src/components/*"],
+      "@pages/*": ["src/pages/*"],
+      "@features/*": ["src/features/*"],
+      "@services/*": ["src/services/*"],
+      "@hooks/*": ["src/hooks/*"],
+      "@store/*": ["src/store/*"],
+      "@styles/*": ["src/styles/*"],
+      "@utils/*": ["src/utils/*"],
+      "@app-types/*": ["src/types/*"],
+      "@data/*": ["src/data/*"]
+    }
   },
   "include": ["src"]
 }

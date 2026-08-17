@@ -10,6 +10,18 @@ export interface User {
   updatedAt: string;
 }
 
+export interface ProductVariant {
+  id: string;
+  productId: string;
+  label: string;
+  price: number;
+  stock: number;
+  isActive: boolean;
+  sortOrder: number;
+  createdAt: string;
+  updatedAt: string;
+}
+
 export interface Product {
   id: string;
   sellerId: string;
@@ -21,6 +33,7 @@ export interface Product {
   imageUrls: string[];
   isActive: boolean;
   isFeatured: boolean;
+  variants: ProductVariant[];
   createdAt: string;
   updatedAt: string;
 }
@@ -55,6 +68,7 @@ export interface OrderItem {
   id: string;
   orderId: string;
   productId: string;
+  variantId?: string;
   quantity: number;
   price: number;
   productSnapshot: Record<string, any>;
@@ -118,6 +132,7 @@ export interface CartItem {
   id: string;
   cartId: string;
   product: Product;
+  variant?: ProductVariant;
   quantity: number;
   createdAt: string;
   updatedAt: string;

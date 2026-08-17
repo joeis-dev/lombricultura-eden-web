@@ -208,6 +208,13 @@
   line-height: var(--line-height-tight);
 }
 
+.currencyTag {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  font-weight: var(--font-weight-medium);
+  margin-left: var(--space-1);
+}
+
 .stockInfo {
   font-size: var(--font-size-sm);
   color: var(--color-accent);
