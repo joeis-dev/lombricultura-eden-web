@@ -1,0 +1,115 @@
+/* About Page Styles */
+.aboutPage {
+  min-height: 60vh;
+}
+
+.heroSection {
+  background-color: var(--color-primary);
+  color: #FFFFFF;
+  padding: var(--space-16) 0;
+  text-align: center;
+}
+
+.heroTitle {
+  font-size: var(--font-size-4xl);
+  font-weight: var(--font-weight-bold);
+  margin: 0 0 var(--space-3) 0;
+  line-height: var(--line-height-tight);
+}
+
+.heroSubtitle {
+  font-size: var(--font-size-lg);
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0;
+}
+
+.aboutSection {
+  padding: var(--space-16) 0;
+  background-color: var(--color-background);
+}
+
+.storyCard {
+  padding: var(--space-8);
+  margin-bottom: var(--space-10);
+}
+
+.storyTitle {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary);
+  margin: 0 0 var(--space-4) 0;
+}
+
+.storyText {
+  font-size: var(--font-size-lg);
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-relaxed);
+  margin: 0;
+}
+
+.valuesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--space-6);
+}
+
+.valueCard {
+  text-align: center;
+  padding: var(--space-8);
+}
+
+.valueIcon {
+  font-size: 3rem;
+  margin-bottom: var(--space-4);
+  display: block;
+  color: var(--color-primary);
+}
+
+.valueTitle {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-primary);
+  margin: 0 0 var(--space-2) 0;
+}
+
+.valueText {
+  font-size: var(--font-size-base);
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-relaxed);
+  margin: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .heroSection {
+    padding: var(--space-12) 0;
+  }
+
+  .aboutSection {
+    padding: var(--space-12) 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .heroSection {
+    padding: var(--space-8) 0;
+  }
+
+  .aboutSection {
+    padding: var(--space-8) 0;
+  }
+}
+
+/* Dark theme support */
+[data-theme="dark"] .aboutSection,
+[data-theme="dark-green"] .aboutSection {
+  background-color: var(--color-text);
+}
+
+[data-theme="dark"] .storyCard,
+[data-theme="dark"] .valueCard,
+[data-theme="dark-green"] .storyCard,
+[data-theme="dark-green"] .valueCard {
+  background-color: var(--color-surface);
+  border-color: var(--color-border);
+}

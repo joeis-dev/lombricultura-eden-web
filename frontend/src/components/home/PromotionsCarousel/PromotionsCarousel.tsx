@@ -9,18 +9,17 @@ interface Promotion {
   description: string;
   buttonText: string;
   buttonLink: string;
-  backgroundImage?: string;
   badge?: string;
 }
 
 const promotions: Promotion[] = [
   {
     id: '1',
-    title: 'HUMUS DE LOMBriz PREMIUM',
+    title: 'HUMUS DE LOMBRIZ PREMIUM',
     subtitle: 'Nutrición 100% Orgánica',
     description: 'Transforma tu jardín con el mejor fertilizante natural. Rico en nutrientes esenciales para plantas saludables.',
     buttonText: 'Comprar Ahora',
-    buttonLink: '/products?category=Humus%20de%20Lombriz',
+    buttonLink: '/tienda?category=Humus%20Sólido',
     badge: 'MÁS VENDIDO'
   },
   {
@@ -29,7 +28,7 @@ const promotions: Promotion[] = [
     subtitle: 'Criadero 100% Mexicano',
     description: 'Lombrices rojas californianas de alta calidad para compostaje doméstico y comercial.',
     buttonText: 'Ver Lombrices',
-    buttonLink: '/products?category=Lombrices',
+    buttonLink: '/tienda?category=Lombrices',
     badge: 'ENVÍO GRATIS'
   },
   {
@@ -38,7 +37,7 @@ const promotions: Promotion[] = [
     subtitle: 'Inicia tu Huerto Hoy',
     description: 'Todo lo que necesitas para comenzar a compostar en casa. Incluye lombrices, humus y guía completa.',
     buttonText: 'Ver Kit',
-    buttonLink: '/products?category=Kits%20de%20Compostaje',
+    buttonLink: '/tienda',
     badge: '20% OFF'
   },
   {
@@ -47,7 +46,7 @@ const promotions: Promotion[] = [
     subtitle: 'Para Agricultura Sustentable',
     description: 'Humus de lombriz especial para agricultura. Mejora la estructura del suelo y aumenta rendimientos.',
     buttonText: 'Cotizar',
-    buttonLink: '/products?category=Abono%20Orgánico'
+    buttonLink: '/tienda'
   }
 ];
 
@@ -66,13 +65,12 @@ const PromotionsCarousel: React.FC = () => {
   const goToSlide = (index: number) => {
     setCurrentSlide(index);
     setIsAutoPlaying(false);
-    // Resume autoplay after 5 seconds
     setTimeout(() => setIsAutoPlaying(true), 5000);
   };
 
   useEffect(() => {
     if (!isAutoPlaying) return;
-    
+
     const interval = setInterval(nextSlide, 5000);
     return () => clearInterval(interval);
   }, [isAutoPlaying, nextSlide]);
@@ -96,8 +94,8 @@ const PromotionsCarousel: React.FC = () => {
               <h2 className={styles.subtitle}>{promo.subtitle}</h2>
               <h1 className={styles.title}>{promo.title}</h1>
               <p className={styles.description}>{promo.description}</p>
-              <Button 
-                size="lg" 
+              <Button
+                size="lg"
                 onClick={() => window.location.href = promo.buttonLink}
                 className={styles.ctaButton}
               >
@@ -109,7 +107,7 @@ const PromotionsCarousel: React.FC = () => {
       </div>
 
       {/* Navigation Arrows */}
-      <button 
+      <button
         className={`${styles.navButton} ${styles.prevButton}`}
         onClick={() => {
           prevSlide();
@@ -120,7 +118,7 @@ const PromotionsCarousel: React.FC = () => {
       >
         ←
       </button>
-      <button 
+      <button
         className={`${styles.navButton} ${styles.nextButton}`}
         onClick={() => {
           nextSlide();

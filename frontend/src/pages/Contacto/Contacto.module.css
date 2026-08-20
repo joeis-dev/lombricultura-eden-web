@@ -1,0 +1,172 @@
+/* Contacto Page Styles */
+.contactoPage {
+  min-height: 60vh;
+}
+
+.heroSection {
+  background-color: var(--color-primary);
+  color: #FFFFFF;
+  padding: var(--space-16) 0;
+  text-align: center;
+}
+
+.heroTitle {
+  font-size: var(--font-size-4xl);
+  font-weight: var(--font-weight-bold);
+  margin: 0 0 var(--space-3) 0;
+  line-height: var(--line-height-tight);
+}
+
+.heroSubtitle {
+  font-size: var(--font-size-lg);
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0;
+}
+
+.contactSection {
+  padding: var(--space-16) 0;
+  background-color: var(--color-background);
+}
+
+.contactLayout {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: var(--space-8);
+  align-items: start;
+}
+
+.methodsTitle {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text);
+  margin: 0 0 var(--space-6) 0;
+}
+
+.methodsGrid {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.methodCard {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.methodIcon {
+  font-size: 2rem;
+}
+
+.methodInfo {
+  min-width: 0;
+}
+
+.methodTitle {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 0 0 var(--space-1) 0;
+}
+
+.methodValue {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-primary);
+  margin: 0;
+  text-decoration: none;
+}
+
+.methodValue:hover {
+  text-decoration: underline;
+}
+
+.formTitle {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text);
+  margin: 0 0 var(--space-6) 0;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.field label {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-secondary);
+}
+
+.textarea {
+  width: 100%;
+  min-height: 140px;
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-base);
+  font-family: inherit;
+  background-color: var(--color-surface);
+  color: var(--color-text);
+  outline: none;
+  resize: vertical;
+}
+
+.textarea:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .heroSection {
+    padding: var(--space-12) 0;
+  }
+
+  .contactSection {
+    padding: var(--space-12) 0;
+  }
+
+  .contactLayout {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .heroSection {
+    padding: var(--space-8) 0;
+  }
+
+  .contactSection {
+    padding: var(--space-8) 0;
+  }
+}
+
+/* Dark theme support */
+[data-theme="dark"] .contactSection,
+[data-theme="dark-green"] .contactSection {
+  background-color: var(--color-text);
+}
+
+[data-theme="dark"] .methodsTitle,
+[data-theme="dark"] .formTitle,
+[data-theme="dark-green"] .methodsTitle,
+[data-theme="dark-green"] .formTitle {
+  color: #FFFFFF;
+}
+
+[data-theme="dark"] .textarea,
+[data-theme="dark-green"] .textarea {
+  background-color: var(--color-surface);
+  color: var(--color-text);
+  border-color: var(--color-border);
+}

@@ -302,6 +302,43 @@
   font-size: var(--font-size-lg);
 }
 
+.productCard--half .productImage {
+  padding-bottom: 80%;
+}
+
+.productCard--half .productInfo {
+  padding: var(--space-3);
+  gap: var(--space-1);
+}
+
+.productCard--half .productTitle a {
+  font-size: var(--font-size-base);
+  height: 2.8em;
+}
+
+.productCard--half .productCategory {
+  font-size: var(--font-size-xs);
+}
+
+.productCard--half .price {
+  font-size: var(--font-size-lg);
+}
+
+.productCard--half .currencyTag,
+.productCard--half .stockInfo {
+  font-size: var(--font-size-xs);
+}
+
+.productCard--half .addToCartButton {
+  padding: var(--space-2) var(--space-3);
+  font-size: var(--font-size-sm);
+}
+
+.productCard--half .productDescription {
+  font-size: var(--font-size-sm);
+  -webkit-line-clamp: 2;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
   .productInfo {

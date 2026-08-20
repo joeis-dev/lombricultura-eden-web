@@ -1,7 +1,7 @@
 import React from 'react';
 import Header from '../Header';
 import Footer from '../Footer';
-import BackToTop from '@components/common/BackToTop/BackToTop';
+import WhatsAppButton from '@components/common/WhatsAppButton/WhatsAppButton';
 import styles from './Layout.module.css';
 
 interface LayoutProps {
@@ -26,8 +26,8 @@ const Layout: React.FC<LayoutProps> = ({
       </main>
       
       {showFooter && <Footer />}
-      
-      <BackToTop />
+
+      <WhatsAppButton />
     </div>
   );
 };

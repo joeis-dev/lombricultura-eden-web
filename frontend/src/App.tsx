@@ -8,8 +8,13 @@ import { ThemeProvider } from './contexts/ThemeContext';
 
 // Lazy load pages for better performance
 const Home = React.lazy(() => import('@pages/Home/Home'));
+const Store = React.lazy(() => import('@pages/Store/Store'));
 const Products = React.lazy(() => import('@pages/Products/Products'));
 const ProductDetail = React.lazy(() => import('@pages/ProductDetail/ProductDetail'));
+const Manuales = React.lazy(() => import('@pages/Manuales/Manuales'));
+const Contacto = React.lazy(() => import('@pages/Contacto/Contacto'));
+const FAQ = React.lazy(() => import('@pages/FAQ/FAQ'));
+const About = React.lazy(() => import('@pages/About/About'));
 const Cart = React.lazy(() => import('@pages/Cart/Cart'));
 const Checkout = React.lazy(() => import('@pages/Checkout/Checkout'));
 const Login = React.lazy(() => import('@pages/Auth/Login'));
@@ -66,8 +71,13 @@ function App() {
             <Routes>
               {/* Public Routes */}
               <Route path="/" element={<Home />} />
+              <Route path="/tienda" element={<Store />} />
               <Route path="/products" element={<Products />} />
               <Route path="/products/:id" element={<ProductDetail />} />
+              <Route path="/manuales" element={<Manuales />} />
+              <Route path="/contacto" element={<Contacto />} />
+              <Route path="/faq" element={<FAQ />} />
+              <Route path="/acerca-de" element={<About />} />
               <Route path="/cart" element={<Cart />} />
               
               {/* Auth Routes - Public Only */}
@@ -160,32 +170,12 @@ function App() {
               {/* Fallback Routes */}
               <Route 
                 path="/about" 
-                element={
-                  <div style={{ padding: '2rem', textAlign: 'center' }}>
-                      <h1>Acerca de Nosotros</h1>
-                      <p>Conoce más sobre nuestra empresa...</p>
-                  </div>
-                } 
+                element={<Navigate to="/acerca-de" replace />}
               />
               
               <Route 
                 path="/contact" 
-                element={
-                  <div style={{ padding: '2rem', textAlign: 'center' }}>
-                      <h1>Contacto</h1>
-                      <p>Comunícate con nuestro equipo...</p>
-                  </div>
-                } 
-              />
-              
-              <Route 
-                path="/faq" 
-                element={
-                  <div style={{ padding: '2rem', textAlign: 'center' }}>
-                      <h1>Preguntas Frecuentes</h1>
-                      <p>Encuentra respuestas a preguntas comunes...</p>
-                  </div>
-                } 
+                element={<Navigate to="/contacto" replace />}
               />
               
               {/* 404 Not Found */}

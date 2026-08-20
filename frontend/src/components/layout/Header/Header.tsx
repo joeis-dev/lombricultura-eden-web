@@ -46,10 +46,45 @@ const Header: React.FC = () => {
             </Link>
             
             <Link 
+              to="/tienda" 
+              className={`${styles.navLink} ${isActive('/tienda') ? styles.active : ''}`}
+            >
+              Tienda
+            </Link>
+
+            <Link 
               to="/products" 
               className={`${styles.navLink} ${isActive('/products') ? styles.active : ''}`}
             >
               Productos
+            </Link>
+
+            <Link 
+              to="/manuales" 
+              className={`${styles.navLink} ${isActive('/manuales') ? styles.active : ''}`}
+            >
+              Manuales
+            </Link>
+
+            <Link 
+              to="/faq" 
+              className={`${styles.navLink} ${isActive('/faq') ? styles.active : ''}`}
+            >
+              FAQs
+            </Link>
+
+            <Link 
+              to="/acerca-de" 
+              className={`${styles.navLink} ${isActive('/acerca-de') ? styles.active : ''}`}
+            >
+              Acerca de
+            </Link>
+
+            <Link 
+              to="/contacto" 
+              className={`${styles.navLink} ${isActive('/contacto') ? styles.active : ''}`}
+            >
+              Contacto
             </Link>
             
             {isAuthenticated && (

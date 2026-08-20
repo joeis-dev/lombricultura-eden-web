@@ -1,0 +1,110 @@
+/* Manuales Page Styles */
+.manualesPage {
+  min-height: 60vh;
+}
+
+.heroSection {
+  background-color: var(--color-primary);
+  color: #FFFFFF;
+  padding: var(--space-16) 0;
+  text-align: center;
+}
+
+.heroTitle {
+  font-size: var(--font-size-4xl);
+  font-weight: var(--font-weight-bold);
+  margin: 0 0 var(--space-3) 0;
+  line-height: var(--line-height-tight);
+}
+
+.heroSubtitle {
+  font-size: var(--font-size-lg);
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0;
+}
+
+.manualesSection {
+  padding: var(--space-16) 0;
+  background-color: var(--color-background);
+}
+
+.manualesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: var(--space-6);
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.manualCard {
+  text-align: center;
+}
+
+.manualIcon {
+  font-size: 3.5rem;
+  margin-bottom: var(--space-4);
+  display: block;
+}
+
+.manualTitle {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary);
+  margin: 0 0 var(--space-3) 0;
+}
+
+.manualDescription {
+  font-size: var(--font-size-base);
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-relaxed);
+  margin: 0 0 var(--space-6) 0;
+}
+
+.manualTag {
+  display: inline-block;
+  padding: var(--space-1) var(--space-3);
+  background-color: var(--color-primary);
+  color: #FFFFFF;
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .heroSection {
+    padding: var(--space-12) 0;
+  }
+
+  .manualesSection {
+    padding: var(--space-12) 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .heroSection {
+    padding: var(--space-8) 0;
+  }
+
+  .manualesSection {
+    padding: var(--space-8) 0;
+  }
+
+  .manualesGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Dark theme support */
+[data-theme="dark"] .manualesSection,
+[data-theme="dark-green"] .manualesSection {
+  background-color: var(--color-text);
+}
+
+[data-theme="dark"] .manualCard,
+[data-theme="dark-green"] .manualCard {
+  background-color: var(--color-surface);
+  border-color: var(--color-border);
+}

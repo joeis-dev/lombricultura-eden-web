@@ -12,7 +12,7 @@ export const products: Product[] = [
     price: 80.0,
     stock: 5000,
     category: 'Lombrices',
-    imageUrls: ['/images/lombriz-roja-californiana.jpg'],
+    imageUrls: ['/lombriz.jpg'],
     isActive: true,
     isFeatured: true,
     variants: [
@@ -38,7 +38,7 @@ export const products: Product[] = [
     price: 1500.0,
     stock: 500,
     category: 'Lombrices',
-    imageUrls: ['/images/lombriz-roja-biomasa.jpg'],
+    imageUrls: ['/lombriz.jpg'],
     isActive: true,
     isFeatured: false,
     variants: [
@@ -58,7 +58,7 @@ export const products: Product[] = [
     price: 130.0,
     stock: 1000,
     category: 'Humus Líquido',
-    imageUrls: ['/images/humus-liquido.jpg'],
+    imageUrls: ['/humus-liquido.jpg'],
     isActive: true,
     isFeatured: true,
     variants: [
@@ -80,7 +80,7 @@ export const products: Product[] = [
     price: 65.0,
     stock: 2000,
     category: 'Humus Sólido',
-    imageUrls: ['/images/humus-solido.jpg'],
+    imageUrls: ['/humus-solido.jpg'],
     isActive: true,
     isFeatured: true,
     variants: [

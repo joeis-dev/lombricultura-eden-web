@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { Card, Button, Loading } from '@components/common';
 import ProductCard from '@components/product/ProductCard';
 import PromotionsCarousel from '@components/home/PromotionsCarousel/PromotionsCarousel';
@@ -56,20 +57,25 @@ const Home: React.FC = () => {
       {/* Featured Products */}
       <section className={styles.featuredSection}>
         <div className="container">
-          <div className={styles.sectionHeader}>
-            <h2 className={styles.sectionTitle}>Productos Destacados</h2>
-            <p className={styles.sectionSubtitle}>
-              Los favoritos de nuestros clientes para un jardín próspero
-            </p>
+          <div className={`${styles.sectionHeader} ${styles.featuredHeader}`}>
+            <div className={styles.featuredHeaderText}>
+              <h2 className={styles.sectionTitle}>Productos Destacados</h2>
+              <p className={styles.sectionSubtitle}>
+                Los favoritos de nuestros clientes para un jardín próspero
+              </p>
+            </div>
+            <Link to="/tienda" className={styles.viewAllLink}>
+              Ver todos los productos
+            </Link>
           </div>
-          
+
           {featuredProducts.length > 0 ? (
             <div className={styles.featuredGrid}>
               {featuredProducts.map(product => (
                 <ProductCard
                   key={product.id}
                   product={product}
-                  variant="default"
+                  variant="half"
                   showAddToCart={true}
                 />
               ))}
@@ -79,18 +85,45 @@ const Home: React.FC = () => {
               <Card>
                 <div style={{ textAlign: 'center', padding: '2rem' }}>
                   <h3>No hay productos destacados disponibles</h3>
-                  <Button onClick={() => window.location.href = '/products'}>
+                  <Button onClick={() => window.location.href = '/tienda'}>
                     Ver Todos los Productos
                   </Button>
                 </div>
               </Card>
             </div>
           )}
-          
-          <div className={styles.viewAllButton}>
-            <Button variant="outline" onClick={() => window.location.href = '/products'}>
-              Ver Catálogo Completo
-            </Button>
+        </div>
+      </section>
+
+      {/* Categories Section */}
+      <section className={styles.categoriesSection}>
+        <div className="container">
+          <div className={styles.sectionHeader}>
+            <h2 className={styles.sectionTitle}>Categorías</h2>
+            <p className={styles.sectionSubtitle}>
+              Explora nuestra línea de productos para lombricultura
+            </p>
+          </div>
+
+          <div className={styles.categoriesGrid}>
+            {[
+              { name: 'Humus de Lombriz', icon: '🌿', count: 12 },
+              { name: 'Lombrices', icon: '🪱', count: 5 },
+              { name: 'Kits de Compostaje', icon: '📦', count: 8 },
+              { name: 'Fertilizantes', icon: '💧', count: 15 },
+              { name: 'Contenedores', icon: '🏠', count: 6 },
+              { name: 'Accesorios', icon: '🛠️', count: 20 }
+            ].map(category => (
+              <div
+                key={category.name}
+                className={styles.categoryCard}
+                onClick={() => window.location.href = `/tienda?category=${encodeURIComponent(category.name)}`}
+              >
+                <div className={styles.categoryIcon}>{category.icon}</div>
+                <h4>{category.name}</h4>
+                <span className={styles.categoryCount}>{category.count} productos</span>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -119,58 +152,6 @@ const Home: React.FC = () => {
               <h3>Asesoría Experta</h3>
               <p>Guías y soporte para tu lombricultura</p>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Categories Section */}
-      <section className={styles.categoriesSection}>
-        <div className="container">
-          <div className={styles.sectionHeader}>
-            <h2 className={styles.sectionTitle}>Categorías</h2>
-            <p className={styles.sectionSubtitle}>
-              Explora nuestra línea de productos para lombricultura
-            </p>
-          </div>
-          
-          <div className={styles.categoriesGrid}>
-            {[
-              { name: 'Humus de Lombriz', icon: '🌿', count: 12 },
-              { name: 'Lombrices', icon: '🪱', count: 5 },
-              { name: 'Kits de Compostaje', icon: '📦', count: 8 },
-              { name: 'Fertilizantes', icon: '💧', count: 15 },
-              { name: 'Contenedores', icon: '🏠', count: 6 },
-              { name: 'Accesorios', icon: '🛠️', count: 20 }
-            ].map(category => (
-              <div 
-                key={category.name}
-                className={styles.categoryCard}
-                onClick={() => window.location.href = `/products?category=${encodeURIComponent(category.name)}`}
-              >
-                <div className={styles.categoryIcon}>{category.icon}</div>
-                <h4>{category.name}</h4>
-                <span className={styles.categoryCount}>{category.count} productos</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Newsletter Section */}
-      <section className={styles.newsletterSection}>
-        <div className="container">
-          <div className={styles.newsletterContent}>
-            <h2>Únete a la Comunidad Edén</h2>
-            <p>Recibe tips de lombricultura, ofertas exclusivas y novedades directo en tu correo</p>
-            <form className={styles.newsletterForm} onSubmit={(e) => e.preventDefault()}>
-              <input
-                type="email"
-                placeholder="Tu correo electrónico"
-                className={styles.newsletterInput}
-                required
-              />
-              <Button type="submit">Suscribirme</Button>
-            </form>
           </div>
         </div>
       </section>

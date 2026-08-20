@@ -7,7 +7,7 @@ import styles from './ProductCard.module.css';
 
 export interface ProductCardProps {
   product: Product;
-  variant?: 'default' | 'compact' | 'detailed';
+  variant?: 'default' | 'compact' | 'detailed' | 'half';
   showAddToCart?: boolean;
   className?: string;
 }

@@ -16,3 +16,5 @@ export type { LoadingProps } from './Loading';
 
 export { default as ErrorBoundary, ErrorBoundaryWrapper } from './ErrorBoundary';
 export type { default as ErrorBoundaryProps } from './ErrorBoundary';
+
+export { WhatsAppButton } from './WhatsAppButton';

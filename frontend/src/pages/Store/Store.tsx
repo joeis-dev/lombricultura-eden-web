@@ -1,0 +1,150 @@
+import React, { useState, useMemo } from 'react';
+import { useSearchParams } from 'react-router-dom';
+import { Input } from '@components/common';
+import ProductCard from '@components/product/ProductCard';
+import PromotionsCarousel from '@components/home/PromotionsCarousel/PromotionsCarousel';
+import { products, categories } from '@data/products';
+import styles from './Store.module.css';
+
+const Store: React.FC = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const initialCategory = searchParams.get('category') || 'Todas';
+
+  const [searchTerm, setSearchTerm] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState(initialCategory);
+  const [sortBy, setSortBy] = useState('name');
+
+  const visibleCategories = categories.filter(c => c !== 'Todas');
+
+  const filteredProducts = useMemo(() => {
+    return products
+      .filter((p) => {
+        const matchesSearch =
+          p.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          p.description?.toLowerCase().includes(searchTerm.toLowerCase());
+        const matchesCategory =
+          selectedCategory === 'Todas' || p.category === selectedCategory;
+        return matchesSearch && matchesCategory && p.isActive;
+      })
+      .sort((a, b) => {
+        switch (sortBy) {
+          case 'price-low':
+            return a.price - b.price;
+          case 'price-high':
+            return b.price - a.price;
+          case 'name':
+            return a.title.localeCompare(b.title);
+          case 'newest':
+            return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+          default:
+            return 0;
+        }
+      });
+  }, [searchTerm, selectedCategory, sortBy]);
+
+  const handleCategoryChange = (category: string) => {
+    setSelectedCategory(category);
+    if (category === 'Todas') {
+      setSearchParams({});
+    } else {
+      setSearchParams({ category });
+    }
+  };
+
+  return (
+    <div className={styles.storePage}>
+      {/* Hero */}
+      <section className={styles.heroSection}>
+        <div className="container">
+          <h1 className={styles.heroTitle}>Bienvenido a Nuestra Tienda</h1>
+          <p className={styles.heroSubtitle}>
+            Productos 100% orgánicos de lombricultura para tu huerto, jardín y agricultura sustentable
+          </p>
+        </div>
+      </section>
+
+      <PromotionsCarousel />
+
+      {/* Catalog */}
+      <section className={styles.catalogSection}>
+        <div className="container">
+          <div className={styles.catalogHeader}>
+            <h2 className={styles.catalogTitle}>Catálogo de Productos</h2>
+            <p className={styles.catalogSubtitle}>
+              {filteredProducts.length} producto{filteredProducts.length !== 1 ? 's' : ''} disponible{filteredProducts.length !== 1 ? 's' : ''}
+            </p>
+          </div>
+
+          <div className={styles.toolbar}>
+            <div className={styles.searchContainer}>
+              <Input
+                placeholder="Buscar productos..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                leftIcon="🔍"
+              />
+            </div>
+
+            <select
+              className={styles.sortSelect}
+              value={sortBy}
+              onChange={(e) => setSortBy(e.target.value)}
+            >
+              <option value="name">Nombre</option>
+              <option value="price-low">Menor precio</option>
+              <option value="price-high">Mayor precio</option>
+              <option value="newest">Más recientes</option>
+            </select>
+          </div>
+
+          <div className={styles.categoryPills}>
+            <button
+              className={`${styles.categoryPill} ${selectedCategory === 'Todas' ? styles.active : ''}`}
+              onClick={() => handleCategoryChange('Todas')}
+            >
+              Todas
+            </button>
+            {visibleCategories.map((category) => (
+              <button
+                key={category}
+                className={`${styles.categoryPill} ${selectedCategory === category ? styles.active : ''}`}
+                onClick={() => handleCategoryChange(category)}
+              >
+                {category}
+              </button>
+            ))}
+          </div>
+
+          {filteredProducts.length > 0 ? (
+            <div className={styles.productsGrid}>
+              {filteredProducts.map((product) => (
+                <ProductCard
+                  key={product.id}
+                  product={product}
+                  variant="default"
+                  showAddToCart={true}
+                />
+              ))}
+            </div>
+          ) : (
+            <div className={styles.noResults}>
+              <h3>No se encontraron productos</h3>
+              <p>Intenta ajustar tus filtros o términos de búsqueda</p>
+              <button
+                className={styles.clearButton}
+                onClick={() => {
+                  setSearchTerm('');
+                  handleCategoryChange('Todas');
+                }}
+              >
+                Limpiar Filtros
+              </button>
+            </div>
+          )}
+        </div>
+      </section>
+    </div>
+  );
+};
+
+export default Store;

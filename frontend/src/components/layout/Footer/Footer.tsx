@@ -40,10 +40,13 @@ const Footer: React.FC = () => {
                   <a href="/products" className={styles.footerLink}>Todos los Productos</a>
                 </li>
                 <li>
-                  <a href="/about" className={styles.footerLink}>Acerca de Nosotros</a>
+                  <a href="/manuales" className={styles.footerLink}>Manuales</a>
                 </li>
                 <li>
-                  <a href="/contact" className={styles.footerLink}>Contacto</a>
+                  <a href="/acerca-de" className={styles.footerLink}>Acerca de Nosotros</a>
+                </li>
+                <li>
+                  <a href="/contacto" className={styles.footerLink}>Contacto</a>
                 </li>
                 <li>
                   <a href="/faq" className={styles.footerLink}>Preguntas Frecuentes</a>
