@@ -25,15 +25,10 @@ const Header: React.FC = () => {
           {/* Logo */}
           <Link to="/" className={styles.logo}>
             <img 
-              src="/logo.svg" 
+              src="/logo_v2_transparency.png" 
               alt="Lombricultura Edén" 
               className={styles.logoImage}
-              onError={(e) => {
-                const target = e.target as HTMLImageElement;
-                target.style.display = 'none';
-              }}
             />
-            <span className={styles.logoText}>Lombricultura Edén</span>
           </Link>
 
           {/* Navigation */}
@@ -43,20 +38,6 @@ const Header: React.FC = () => {
               className={`${styles.navLink} ${isActive('/') ? styles.active : ''}`}
             >
               Inicio
-            </Link>
-            
-            <Link 
-              to="/tienda" 
-              className={`${styles.navLink} ${isActive('/tienda') ? styles.active : ''}`}
-            >
-              Tienda
-            </Link>
-
-            <Link 
-              to="/products" 
-              className={`${styles.navLink} ${isActive('/products') ? styles.active : ''}`}
-            >
-              Productos
             </Link>
 
             <Link 
@@ -142,22 +123,6 @@ const Header: React.FC = () => {
 
           {/* Actions */}
           <div className={styles.headerActions}>
-            {/* Search */}
-            <div className={styles.searchContainer}>
-              <input
-                type="search"
-                placeholder="Buscar productos..."
-                className={styles.searchInput}
-                onChange={(e) => {
-                  // TODO: Implement search functionality
-                  console.log('Search:', e.target.value);
-                }}
-              />
-              <button className={styles.searchButton} aria-label="Buscar">
-                🔍
-              </button>
-            </div>
-
             {/* Cart */}
             <Link to="/cart" className={styles.cartButton}>
               🛒

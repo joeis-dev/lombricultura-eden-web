@@ -1,158 +1,197 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { Card, Button, Loading } from '@components/common';
+import React, { useState, useEffect, useMemo } from 'react';
+import { useSearchParams } from 'react-router-dom';
+import { Input, Loading } from '@components/common';
 import ProductCard from '@components/product/ProductCard';
-import PromotionsCarousel from '@components/home/PromotionsCarousel/PromotionsCarousel';
-import { products } from '@data/products';
+import { getProducts } from '@services/productService';
 import type { Product } from '@app-types/index';
 import styles from './Home.module.css';
 
 const Home: React.FC = () => {
-  const [featuredProducts, setFeaturedProducts] = useState<Product[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const initialCategory = searchParams.get('category') || 'Todas';
+
+  const [products, setProducts] = useState<Product[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
+  const [searchTerm, setSearchTerm] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState(initialCategory);
+  const [sortBy, setSortBy] = useState('name');
+
   useEffect(() => {
-    const fetchFeaturedProducts = async () => {
+    let cancelled = false;
+    const loadProducts = async () => {
       try {
-        setLoading(true);
-        await new Promise(resolve => setTimeout(resolve, 500));
-        setFeaturedProducts(products.filter(p => p.isFeatured));
+        setIsLoading(true);
+        setError(null);
+        const data = await getProducts();
+        if (!cancelled) {
+          setProducts(data);
+        }
       } catch (err) {
-        setError('Failed to load featured products');
-        console.error('Error fetching featured products:', err);
+        if (!cancelled) {
+          setError('No se pudieron cargar los productos');
+          console.error('Error fetching products:', err);
+        }
       } finally {
-        setLoading(false);
+        if (!cancelled) {
+          setIsLoading(false);
+        }
       }
     };
 
-    fetchFeaturedProducts();
+    loadProducts();
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
-  if (loading) {
+  const visibleCategories = useMemo(() => {
+    const uniqueCategories = Array.from(
+      new Set(products.map((p) => p.category).filter((c): c is string => Boolean(c)))
+    );
+    return uniqueCategories.sort((a, b) => a.localeCompare(b));
+  }, [products]);
+
+  const filteredProducts = useMemo(() => {
+    return products
+      .filter((p) => {
+        const matchesSearch =
+          p.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          p.description?.toLowerCase().includes(searchTerm.toLowerCase());
+        const matchesCategory =
+          selectedCategory === 'Todas' || p.category === selectedCategory;
+        return matchesSearch && matchesCategory && p.isActive;
+      })
+      .sort((a, b) => {
+        switch (sortBy) {
+          case 'price-low':
+            return a.price - b.price;
+          case 'price-high':
+            return b.price - a.price;
+          case 'name':
+            return a.title.localeCompare(b.title);
+          case 'newest':
+            return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+          default:
+            return 0;
+        }
+      });
+  }, [products, searchTerm, selectedCategory, sortBy]);
+
+  const handleCategoryChange = (category: string) => {
+    setSelectedCategory(category);
+    if (category === 'Todas') {
+      setSearchParams({});
+    } else {
+      setSearchParams({ category });
+    }
+  };
+
+  if (isLoading) {
     return (
-      <div className={styles.loadingContainer}>
-        <Loading size="lg" text="Cargando Lombricultura Edén..." />
+      <div className={styles.storePage}>
+        <div className="container" style={{ display: 'flex', justifyContent: 'center', padding: '4rem 0' }}>
+          <Loading size="lg" text="Cargando productos..." />
+        </div>
       </div>
     );
   }
 
   if (error) {
     return (
-      <div className={styles.errorContainer}>
-        <Card>
-          <h2>Bienvenido a Lombricultura Edén</h2>
-          <p>{error}</p>
-          <Button onClick={() => window.location.reload()}>Intentar de Nuevo</Button>
-        </Card>
+      <div className={styles.storePage}>
+        <div className="container">
+          <div className={styles.noResults}>
+            <h3>No se pudieron cargar los productos</h3>
+            <p>{error}</p>
+            <button className={styles.clearButton} onClick={() => window.location.reload()}>
+              Intentar de Nuevo
+            </button>
+          </div>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className={styles.homePage}>
-      {/* Promotions Carousel */}
-      <PromotionsCarousel />
-
-      {/* Featured Products */}
-      <section className={styles.featuredSection}>
+    <div className={styles.storePage}>
+      {/* Catalog */}
+      <section className={styles.catalogSection}>
         <div className="container">
-          <div className={`${styles.sectionHeader} ${styles.featuredHeader}`}>
-            <div className={styles.featuredHeaderText}>
-              <h2 className={styles.sectionTitle}>Productos Destacados</h2>
-              <p className={styles.sectionSubtitle}>
-                Los favoritos de nuestros clientes para un jardín próspero
-              </p>
-            </div>
-            <Link to="/tienda" className={styles.viewAllLink}>
-              Ver todos los productos
-            </Link>
+          <div className={styles.catalogHeader}>
+            <h2 className={styles.catalogTitle}>Catálogo de Productos</h2>
+            <p className={styles.catalogSubtitle}>
+              {filteredProducts.length} producto{filteredProducts.length !== 1 ? 's' : ''} disponible{filteredProducts.length !== 1 ? 's' : ''}
+            </p>
           </div>
 
-          {featuredProducts.length > 0 ? (
-            <div className={styles.featuredGrid}>
-              {featuredProducts.map(product => (
+          <div className={styles.toolbar}>
+            <div className={styles.searchContainer}>
+              <Input
+                placeholder="Buscar productos..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                leftIcon="🔍"
+              />
+            </div>
+
+            <select
+              className={styles.sortSelect}
+              value={sortBy}
+              onChange={(e) => setSortBy(e.target.value)}
+            >
+              <option value="name">Nombre</option>
+              <option value="price-low">Menor precio</option>
+              <option value="price-high">Mayor precio</option>
+              <option value="newest">Más recientes</option>
+            </select>
+          </div>
+
+          <div className={styles.categoryPills}>
+            <button
+              className={`${styles.categoryPill} ${selectedCategory === 'Todas' ? styles.active : ''}`}
+              onClick={() => handleCategoryChange('Todas')}
+            >
+              Todas
+            </button>
+            {visibleCategories.map((category) => (
+              <button
+                key={category}
+                className={`${styles.categoryPill} ${selectedCategory === category ? styles.active : ''}`}
+                onClick={() => handleCategoryChange(category)}
+              >
+                {category}
+              </button>
+            ))}
+          </div>
+
+          {filteredProducts.length > 0 ? (
+            <div className={styles.productsGrid}>
+              {filteredProducts.map((product) => (
                 <ProductCard
                   key={product.id}
                   product={product}
-                  variant="half"
+                  variant="default"
                   showAddToCart={true}
                 />
               ))}
             </div>
           ) : (
-            <div className={styles.noProducts}>
-              <Card>
-                <div style={{ textAlign: 'center', padding: '2rem' }}>
-                  <h3>No hay productos destacados disponibles</h3>
-                  <Button onClick={() => window.location.href = '/tienda'}>
-                    Ver Todos los Productos
-                  </Button>
-                </div>
-              </Card>
+            <div className={styles.noResults}>
+              <h3>No se encontraron productos</h3>
+              <p>Intenta ajustar tus filtros o términos de búsqueda</p>
+              <button
+                className={styles.clearButton}
+                onClick={() => {
+                  setSearchTerm('');
+                  handleCategoryChange('Todas');
+                }}
+              >
+                Limpiar Filtros
+              </button>
             </div>
           )}
-        </div>
-      </section>
-
-      {/* Categories Section */}
-      <section className={styles.categoriesSection}>
-        <div className="container">
-          <div className={styles.sectionHeader}>
-            <h2 className={styles.sectionTitle}>Categorías</h2>
-            <p className={styles.sectionSubtitle}>
-              Explora nuestra línea de productos para lombricultura
-            </p>
-          </div>
-
-          <div className={styles.categoriesGrid}>
-            {[
-              { name: 'Humus de Lombriz', icon: '🌿', count: 12 },
-              { name: 'Lombrices', icon: '🪱', count: 5 },
-              { name: 'Kits de Compostaje', icon: '📦', count: 8 },
-              { name: 'Fertilizantes', icon: '💧', count: 15 },
-              { name: 'Contenedores', icon: '🏠', count: 6 },
-              { name: 'Accesorios', icon: '🛠️', count: 20 }
-            ].map(category => (
-              <div
-                key={category.name}
-                className={styles.categoryCard}
-                onClick={() => window.location.href = `/tienda?category=${encodeURIComponent(category.name)}`}
-              >
-                <div className={styles.categoryIcon}>{category.icon}</div>
-                <h4>{category.name}</h4>
-                <span className={styles.categoryCount}>{category.count} productos</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Features Section */}
-      <section className={styles.featuresSection}>
-        <div className="container">
-          <div className={styles.featuresGrid}>
-            <div className={styles.featureCard}>
-              <div className={styles.featureIcon}>🌱</div>
-              <h3>100% Orgánico</h3>
-              <p>Productos naturales sin químicos sintéticos</p>
-            </div>
-            <div className={styles.featureCard}>
-              <div className={styles.featureIcon}>♻️</div>
-              <h3>Sustentable</h3>
-              <p>Compostaje que ayuda al medio ambiente</p>
-            </div>
-            <div className={styles.featureCard}>
-              <div className={styles.featureIcon}>🚚</div>
-              <h3>Envío Rápido</h3>
-              <p>Entrega en 24-48 horas a todo México</p>
-            </div>
-            <div className={styles.featureCard}>
-              <div className={styles.featureIcon}>📚</div>
-              <h3>Asesoría Experta</h3>
-              <p>Guías y soporte para tu lombricultura</p>
-            </div>
-          </div>
         </div>
       </section>
     </div>

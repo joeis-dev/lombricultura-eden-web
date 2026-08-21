@@ -24,7 +24,7 @@ export interface ProductVariant {
 
 export interface Product {
   id: string;
-  sellerId: string;
+  sellerId?: string;
   title: string;
   description?: string;
   price: number;
@@ -32,7 +32,9 @@ export interface Product {
   category?: string;
   imageUrls: string[];
   isActive: boolean;
-  isFeatured: boolean;
+  /** Reserved for admin-managed offers */
+  isOnSale: boolean;
+  discountPercent?: number;
   variants: ProductVariant[];
   createdAt: string;
   updatedAt: string;

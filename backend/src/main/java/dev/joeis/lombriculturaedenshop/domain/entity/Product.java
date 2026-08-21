@@ -54,9 +54,13 @@ public class Product {
     @Builder.Default
     private Boolean isActive = true;
 
-    @Column(name = "is_featured")
+    /** Managed by site admin to mark special offers */
+    @Column(name = "is_on_sale")
     @Builder.Default
-    private Boolean isFeatured = false;
+    private Boolean isOnSale = false;
+
+    @Column(name = "discount_percent", precision = 5, scale = 2)
+    private BigDecimal discountPercent;
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     @OrderBy("sortOrder ASC")

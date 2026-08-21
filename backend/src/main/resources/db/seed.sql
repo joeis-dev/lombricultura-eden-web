@@ -18,7 +18,7 @@ VALUES (
 -- ============================================================
 -- Product 1: Lombriz Roja Californiana (por cantidad)
 -- ============================================================
-INSERT INTO products (id, seller_id, title, description, price, stock, category, image_urls, is_active, is_featured, created_at, updated_at)
+INSERT INTO products (id, seller_id, title, description, price, stock, category, image_urls, is_active, is_on_sale, discount_percent, created_at, updated_at)
 VALUES (
     'b1eebc99-9c0b-4ef8-bb6d-6bb9bd380a01',
     'a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11',
@@ -29,7 +29,8 @@ VALUES (
     'Lombrices',
     ARRAY['/lombriz.jpg'],
     true,
-    true,
+    false,
+    NULL,
     CURRENT_TIMESTAMP,
     CURRENT_TIMESTAMP
 );
@@ -49,7 +50,7 @@ INSERT INTO product_variants (product_id, label, price, stock, is_active, sort_o
 -- ============================================================
 -- Product 2: Lombriz Roja Californiana - Biomasa (por kilogramo)
 -- ============================================================
-INSERT INTO products (id, seller_id, title, description, price, stock, category, image_urls, is_active, is_featured, created_at, updated_at)
+INSERT INTO products (id, seller_id, title, description, price, stock, category, image_urls, is_active, is_on_sale, discount_percent, created_at, updated_at)
 VALUES (
     'b1eebc99-9c0b-4ef8-bb6d-6bb9bd380a02',
     'a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11',
@@ -61,6 +62,7 @@ VALUES (
     ARRAY['/lombriz.jpg'],
     true,
     false,
+    NULL,
     CURRENT_TIMESTAMP,
     CURRENT_TIMESTAMP
 );
@@ -74,7 +76,7 @@ INSERT INTO product_variants (product_id, label, price, stock, is_active, sort_o
 -- ============================================================
 -- Product 3: Humus de Lombriz Líquido
 -- ============================================================
-INSERT INTO products (id, seller_id, title, description, price, stock, category, image_urls, is_active, is_featured, created_at, updated_at)
+INSERT INTO products (id, seller_id, title, description, price, stock, category, image_urls, is_active, is_on_sale, discount_percent, created_at, updated_at)
 VALUES (
     'b1eebc99-9c0b-4ef8-bb6d-6bb9bd380a03',
     'a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11',
@@ -85,7 +87,8 @@ VALUES (
     'Humus Líquido',
     ARRAY['/humus-liquido.jpg'],
     true,
-    true,
+    false,
+    NULL,
     CURRENT_TIMESTAMP,
     CURRENT_TIMESTAMP
 );
@@ -101,7 +104,7 @@ INSERT INTO product_variants (product_id, label, price, stock, is_active, sort_o
 -- ============================================================
 -- Product 4: Humus de Lombriz Sólido
 -- ============================================================
-INSERT INTO products (id, seller_id, title, description, price, stock, category, image_urls, is_active, is_featured, created_at, updated_at)
+INSERT INTO products (id, seller_id, title, description, price, stock, category, image_urls, is_active, is_on_sale, discount_percent, created_at, updated_at)
 VALUES (
     'b1eebc99-9c0b-4ef8-bb6d-6bb9bd380a04',
     'a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11',
@@ -112,7 +115,8 @@ VALUES (
     'Humus Sólido',
     ARRAY['/humus-solido.jpg'],
     true,
-    true,
+    false,
+    NULL,
     CURRENT_TIMESTAMP,
     CURRENT_TIMESTAMP
 );

@@ -1,6 +1,7 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Card } from '@components/common';
+import { useCartStore } from '@store/cartStore';
 import type { Product } from '@app-types/index';
 import { getMinPrice, getTotalStock } from '@data/products';
 import styles from './ProductCard.module.css';
@@ -18,16 +19,25 @@ const ProductCard: React.FC<ProductCardProps> = ({
   showAddToCart = true,
   className = '',
 }) => {
+  const navigate = useNavigate();
+  const addItem = useCartStore((state) => state.addItem);
+
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
     console.log('Add to cart:', product.title);
   };
 
-  const handleQuickView = (e: React.MouseEvent) => {
+  const handleBuyNow = async (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    console.log('Quick view:', product.title);
+    if (isOutOfStock) return;
+    try {
+      await addItem(product, 1);
+      navigate('/checkout');
+    } catch (error) {
+      console.error('Buy now failed:', error);
+    }
   };
 
   const hasVariants = product.variants && product.variants.length > 0;
@@ -74,24 +84,16 @@ const ProductCard: React.FC<ProductCardProps> = ({
               ¡Solo quedan {totalStock}!
             </span>
           )}
-          {product.isFeatured && (
-            <span className={`${styles.badge} ${styles.badgeFeatured}`}>
-              Destacado
+          {product.isOnSale && product.discountPercent ? (
+            <span className={`${styles.badge} ${styles.badgeSale}`}>
+              Oferta: {product.discountPercent}% descuento
             </span>
-          )}
+          ) : null}
         </div>
 
         {/* Quick Actions */}
         {variant !== 'compact' && (
           <div className={styles.quickActions}>
-            <button
-              className={styles.quickActionButton}
-              onClick={handleQuickView}
-              aria-label="Quick view"
-              title="Quick view"
-            >
-              👁️
-            </button>
             <button
               className={styles.quickActionButton}
               onClick={() => {
@@ -157,6 +159,13 @@ const ProductCard: React.FC<ProductCardProps> = ({
               disabled={isOutOfStock}
             >
               {isOutOfStock ? 'Agotado' : 'Agregar al Carrito'}
+            </button>
+            <button
+              className={`${styles.buyNowButton} ${isOutOfStock ? styles.disabled : ''}`}
+              onClick={handleBuyNow}
+              disabled={isOutOfStock}
+            >
+              Comprar ahora mismo
             </button>
           </div>
         )}

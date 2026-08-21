@@ -14,7 +14,7 @@ export const products: Product[] = [
     category: 'Lombrices',
     imageUrls: ['/lombriz.jpg'],
     isActive: true,
-    isFeatured: true,
+    isOnSale: false,
     variants: [
       { id: 'v1-01', productId: 'b1eebc99-9c0b-4ef8-bb6d-6bb9bd380a01', label: '50 lombrices', price: 80, stock: 200, isActive: true, sortOrder: 1, createdAt: now, updatedAt: now },
       { id: 'v1-02', productId: 'b1eebc99-9c0b-4ef8-bb6d-6bb9bd380a01', label: '100 lombrices', price: 150, stock: 200, isActive: true, sortOrder: 2, createdAt: now, updatedAt: now },
@@ -40,7 +40,7 @@ export const products: Product[] = [
     category: 'Lombrices',
     imageUrls: ['/lombriz.jpg'],
     isActive: true,
-    isFeatured: false,
+    isOnSale: false,
     variants: [
       { id: 'v2-01', productId: 'b1eebc99-9c0b-4ef8-bb6d-6bb9bd380a02', label: '1 kg', price: 1500, stock: 200, isActive: true, sortOrder: 1, createdAt: now, updatedAt: now },
       { id: 'v2-02', productId: 'b1eebc99-9c0b-4ef8-bb6d-6bb9bd380a02', label: '2 kg', price: 2700, stock: 100, isActive: true, sortOrder: 2, createdAt: now, updatedAt: now },
@@ -60,7 +60,7 @@ export const products: Product[] = [
     category: 'Humus Líquido',
     imageUrls: ['/humus-liquido.jpg'],
     isActive: true,
-    isFeatured: true,
+    isOnSale: false,
     variants: [
       { id: 'v3-01', productId: 'b1eebc99-9c0b-4ef8-bb6d-6bb9bd380a03', label: '1 L', price: 130, stock: 500, isActive: true, sortOrder: 1, createdAt: now, updatedAt: now },
       { id: 'v3-02', productId: 'b1eebc99-9c0b-4ef8-bb6d-6bb9bd380a03', label: '3.7 L', price: 360, stock: 200, isActive: true, sortOrder: 2, createdAt: now, updatedAt: now },
@@ -82,7 +82,7 @@ export const products: Product[] = [
     category: 'Humus Sólido',
     imageUrls: ['/humus-solido.jpg'],
     isActive: true,
-    isFeatured: true,
+    isOnSale: false,
     variants: [
       { id: 'v4-01', productId: 'b1eebc99-9c0b-4ef8-bb6d-6bb9bd380a04', label: '1 kg', price: 65, stock: 500, isActive: true, sortOrder: 1, createdAt: now, updatedAt: now },
       { id: 'v4-02', productId: 'b1eebc99-9c0b-4ef8-bb6d-6bb9bd380a04', label: '2 kg', price: 100, stock: 400, isActive: true, sortOrder: 2, createdAt: now, updatedAt: now },

@@ -21,7 +21,7 @@ public interface ProductRepository extends JpaRepository<Product, UUID> {
 
     Page<Product> findByIsActiveTrueAndSeller(User seller, Pageable pageable);
 
-    List<Product> findByIsActiveTrueAndIsFeaturedTrue();
+    List<Product> findByIsActiveTrueAndIsOnSaleTrue();
 
     @Query("SELECT p FROM Product p WHERE p.isActive = true AND " +
            "(LOWER(p.title) LIKE LOWER(CONCAT('%', :search, '%')) OR " +

@@ -27,7 +27,8 @@ CREATE TABLE IF NOT EXISTS products (
     category VARCHAR(100),
     image_urls TEXT[],
     is_active BOOLEAN DEFAULT true,
-    is_featured BOOLEAN DEFAULT false,
+    is_on_sale BOOLEAN DEFAULT false,
+    discount_percent DECIMAL(5, 2),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
@@ -145,7 +146,7 @@ CREATE INDEX IF NOT EXISTS idx_users_role ON users(role);
 CREATE INDEX IF NOT EXISTS idx_products_seller ON products(seller_id);
 CREATE INDEX IF NOT EXISTS idx_products_category ON products(category);
 CREATE INDEX IF NOT EXISTS idx_products_active ON products(is_active);
-CREATE INDEX IF NOT EXISTS idx_products_featured ON products(is_featured);
+CREATE INDEX IF NOT EXISTS idx_products_on_sale ON products(is_on_sale);
 
 CREATE INDEX IF NOT EXISTS idx_product_variants_product ON product_variants(product_id);
 CREATE INDEX IF NOT EXISTS idx_product_variants_active ON product_variants(is_active);

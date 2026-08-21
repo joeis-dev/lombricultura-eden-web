@@ -24,6 +24,8 @@
         <maven.compiler.target>21</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <springdoc.version>2.3.0</springdoc.version>
+        <!-- Override managed version: latest Lombok supports modern JDKs (25/26) -->
+        <lombok.version>1.18.42</lombok.version>
         <jjwt.version>0.12.5</jjwt.version>
         <stripe.version>25.12.0</stripe.version>
     </properties>
@@ -128,6 +130,14 @@
 
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <!-- JDK 23+ disables annotation processing by default; Lombok needs it -->
+                    <proc>full</proc>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
