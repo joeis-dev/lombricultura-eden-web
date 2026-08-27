@@ -7,8 +7,8 @@ import styles from './Header.module.css';
 const Header: React.FC = () => {
   const location = useLocation();
   const { user, isAuthenticated, logout } = useAuthStore();
-  const getTotalItems = useCartStore((state) => state.getTotalItems);
-  const totalItems = getTotalItems();
+  const items = useCartStore((state) => state.items);
+  const totalItems = items.reduce((total, item) => total + item.quantity, 0);
 
   const isActive = (path: string) => {
     return location.pathname === path || location.pathname.startsWith(path + '/');
@@ -24,11 +24,13 @@ const Header: React.FC = () => {
         <div className={styles.headerContent}>
           {/* Logo */}
           <Link to="/" className={styles.logo}>
-            <img 
-              src="/logo_v2_transparency.png" 
-              alt="Lombricultura Edén" 
-              className={styles.logoImage}
-            />
+            <span className={styles.logoCircle}>
+              <img 
+                src="/logo_v2_transparency.png" 
+                alt="Lombricultura Edén" 
+                className={styles.logoImage}
+              />
+            </span>
           </Link>
 
           {/* Navigation */}

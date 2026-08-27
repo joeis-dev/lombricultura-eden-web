@@ -1,15 +1,12 @@
-
 import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
-import type { Cart, Product } from '@app-types/index';
-import apiClient from '@services/api';
+import { createJSONStorage, persist } from 'zustand/middleware';
+import type { CartItem, Product, ProductVariant } from '@app-types/index';
 
 interface CartState {
-  cart: Cart | null;
+  items: CartItem[];
   isLoading: boolean;
-  sessionId: string | null;
   fetchCart: () => Promise<void>;
-  addItem: (product: Product, quantity: number) => Promise<void>;
+  addItem: (product: Product, quantity: number, variant?: ProductVariant) => Promise<void>;
   updateQuantity: (itemId: string, quantity: number) => Promise<void>;
   removeItem: (itemId: string) => Promise<void>;
   clearCart: () => Promise<void>;
@@ -17,112 +14,76 @@ interface CartState {
   getTotalPrice: () => number;
 }
 
-const generateSessionId = () => {
-  return `guest_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
-};
+const getItemId = (product: Product, variant?: ProductVariant) =>
+  variant ? `${product.id}-${variant.id}` : product.id;
 
 export const useCartStore = create<CartState>()(
   persist(
     (set, get) => ({
-      cart: null,
+      items: [],
       isLoading: false,
-      sessionId: null,
 
       fetchCart: async () => {
-        set({ isLoading: true });
-        try {
-          let sessionId = get().sessionId;
-          if (!sessionId) {
-            sessionId = generateSessionId();
-            set({ sessionId });
-          }
-
-          const response = await apiClient.get<Cart>('/cart', {
-            params: { sessionId },
-          });
-          set({ cart: response.data, isLoading: false });
-        } catch (error) {
-          set({ isLoading: false });
-          throw error;
-        }
+        set({ isLoading: false });
       },
 
-      addItem: async (product: Product, quantity: number) => {
-        set({ isLoading: true });
-        try {
-          let sessionId = get().sessionId;
-          if (!sessionId) {
-            sessionId = generateSessionId();
-            set({ sessionId });
-          }
+      addItem: async (product, quantity, variant) => {
+        const items = [...get().items];
+        const id = getItemId(product, variant);
+        const existing = items.find((item) => item.id === id);
+        const stock = variant?.stock ?? product.stock;
 
-          const response = await apiClient.post<Cart>('/cart/items', {
-            productId: product.id,
-            quantity,
-            sessionId,
+        if (existing) {
+          existing.quantity = Math.min(existing.quantity + quantity, stock || 99);
+        } else {
+          const now = new Date().toISOString();
+          items.push({
+            id,
+            cartId: 'local',
+            product,
+            variant,
+            quantity: Math.min(quantity, stock || 99),
+            createdAt: now,
+            updatedAt: now,
           });
-          set({ cart: response.data, isLoading: false });
-        } catch (error) {
-          set({ isLoading: false });
-          throw error;
         }
+
+        set({ items });
       },
 
-      updateQuantity: async (itemId: string, quantity: number) => {
-        set({ isLoading: true });
-        try {
-          const response = await apiClient.put<Cart>(`/cart/items/${itemId}`, {
-            quantity,
-          });
-          set({ cart: response.data, isLoading: false });
-        } catch (error) {
-          set({ isLoading: false });
-          throw error;
-        }
+      updateQuantity: async (itemId, quantity) => {
+        const nextQuantity = Math.max(1, Math.floor(quantity));
+        const items = get().items.map((item) =>
+          item.id === itemId
+            ? { ...item, quantity: nextQuantity, updatedAt: new Date().toISOString() }
+            : item
+        );
+        set({ items });
       },
 
-      removeItem: async (itemId: string) => {
-        set({ isLoading: true });
-        try {
-          const response = await apiClient.delete<Cart>(`/cart/items/${itemId}`);
-          set({ cart: response.data, isLoading: false });
-        } catch (error) {
-          set({ isLoading: false });
-          throw error;
-        }
+      removeItem: async (itemId) => {
+        set({ items: get().items.filter((item) => item.id !== itemId) });
       },
 
       clearCart: async () => {
-        set({ isLoading: true });
-        try {
-          await apiClient.delete('/cart');
-          set({ cart: null, isLoading: false });
-        } catch (error) {
-          set({ isLoading: false });
-          throw error;
-        }
+        set({ items: [] });
       },
 
       getTotalItems: () => {
-        const cart = get().cart;
-        if (!cart || !cart.items) return 0;
-        return cart.items.reduce((total, item) => total + item.quantity, 0);
+        return get().items.reduce((total, item) => total + item.quantity, 0);
       },
 
       getTotalPrice: () => {
-        const cart = get().cart;
-        if (!cart || !cart.items) return 0;
-        return cart.items.reduce(
-          (total, item) => total + item.product.price * item.quantity,
-          0
-        );
+        return get().items.reduce((total, item) => {
+          const unitPrice = item.variant ? item.variant.price : item.product.price;
+          return total + unitPrice * item.quantity;
+        }, 0);
       },
     }),
     {
       name: 'cart-storage',
-      partialize: (state) => ({
-        sessionId: state.sessionId,
-      }),
+      storage: createJSONStorage(() => localStorage),
+      partialize: (state) => ({ items: state.items }),
     }
   )
 );

@@ -83,7 +83,7 @@ VALUES (
     'Humus de Lombriz Líquido',
     'Humus de lombriz líquido 100% natural, rico en nutrientes, microorganismos benéficos y ácidos húmicos. Ideal para riego por goteo, aspersión o pulverización foliar. Fortalece las plantas y mejora la estructura del suelo.',
     130.00,
-    1000,
+    20,
     'Humus Líquido',
     ARRAY['/humus-liquido.jpg'],
     true,
@@ -93,13 +93,13 @@ VALUES (
     CURRENT_TIMESTAMP
 );
 
--- Variantes: Por volumen
+-- Variantes: Por volumen (solo queda presentación de 20 L, con 20 unidades)
 INSERT INTO product_variants (product_id, label, price, stock, is_active, sort_order, created_at, updated_at) VALUES
-('b1eebc99-9c0b-4ef8-bb6d-6bb9bd380a03', '1 L',    130.00, 500, true, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-('b1eebc99-9c0b-4ef8-bb6d-6bb9bd380a03', '3.7 L',  360.00, 200, true, 2, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-('b1eebc99-9c0b-4ef8-bb6d-6bb9bd380a03', '5 L',    440.00, 150, true, 3, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-('b1eebc99-9c0b-4ef8-bb6d-6bb9bd380a03', '10 L',   700.00, 100, true, 4, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-('b1eebc99-9c0b-4ef8-bb6d-6bb9bd380a03', '20 L',  1200.00,  50, true, 5, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+('b1eebc99-9c0b-4ef8-bb6d-6bb9bd380a03', '1 L',    130.00,   0, false, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('b1eebc99-9c0b-4ef8-bb6d-6bb9bd380a03', '3.7 L',  360.00,   0, false, 2, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('b1eebc99-9c0b-4ef8-bb6d-6bb9bd380a03', '5 L',    440.00,   0, false, 3, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('b1eebc99-9c0b-4ef8-bb6d-6bb9bd380a03', '10 L',   700.00,   0, false, 4, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('b1eebc99-9c0b-4ef8-bb6d-6bb9bd380a03', '20 L',  1200.00,  20, true,  5, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
 -- ============================================================
 -- Product 4: Humus de Lombriz Sólido
@@ -111,7 +111,7 @@ VALUES (
     'Humus de Lombriz Sólido',
     'Humus de lombriz sólido (castaña de lombriz) 100% natural. Excelente como sustrato, enmienda orgánica o componente de mezclas para semilleros. Rico en materia orgánica, nitrógeno, fósforo y potasio.',
     65.00,
-    2000,
+    0,
     'Humus Sólido',
     ARRAY['/humus-solido.jpg'],
     true,
@@ -121,11 +121,11 @@ VALUES (
     CURRENT_TIMESTAMP
 );
 
--- Variantes: Por peso
+-- Variantes: Por peso (fuera de stock)
 INSERT INTO product_variants (product_id, label, price, stock, is_active, sort_order, created_at, updated_at) VALUES
-('b1eebc99-9c0b-4ef8-bb6d-6bb9bd380a04', '1 kg',   65.00, 500, true, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-('b1eebc99-9c0b-4ef8-bb6d-6bb9bd380a04', '2 kg',  100.00, 400, true, 2, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-('b1eebc99-9c0b-4ef8-bb6d-6bb9bd380a04', '3 kg',  130.00, 300, true, 3, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-('b1eebc99-9c0b-4ef8-bb6d-6bb9bd380a04', '5 kg',  200.00, 200, true, 4, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-('b1eebc99-9c0b-4ef8-bb6d-6bb9bd380a04', '10 kg', 320.00, 100, true, 5, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-('b1eebc99-9c0b-4ef8-bb6d-6bb9bd380a04', '20 kg', 500.00,  50, true, 6, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+('b1eebc99-9c0b-4ef8-bb6d-6bb9bd380a04', '1 kg',   65.00, 0, true, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('b1eebc99-9c0b-4ef8-bb6d-6bb9bd380a04', '2 kg',  100.00, 0, true, 2, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('b1eebc99-9c0b-4ef8-bb6d-6bb9bd380a04', '3 kg',  130.00, 0, true, 3, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('b1eebc99-9c0b-4ef8-bb6d-6bb9bd380a04', '5 kg',  200.00, 0, true, 4, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('b1eebc99-9c0b-4ef8-bb6d-6bb9bd380a04', '10 kg', 320.00, 0, true, 5, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('b1eebc99-9c0b-4ef8-bb6d-6bb9bd380a04', '20 kg', 500.00, 0, true, 6, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);

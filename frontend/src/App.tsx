@@ -8,7 +8,6 @@ import { ThemeProvider } from './contexts/ThemeContext';
 
 // Lazy load pages for better performance
 const Home = React.lazy(() => import('@pages/Home/Home'));
-const Products = React.lazy(() => import('@pages/Products/Products'));
 const ProductDetail = React.lazy(() => import('@pages/ProductDetail/ProductDetail'));
 const Manuales = React.lazy(() => import('@pages/Manuales/Manuales'));
 const Contacto = React.lazy(() => import('@pages/Contacto/Contacto'));
@@ -72,7 +71,7 @@ function App() {
               <Route path="/" element={<Home />} />
               {/* Legacy store URL kept as redirect */}
               <Route path="/tienda" element={<Navigate to="/" replace />} />
-              <Route path="/products" element={<Products />} />
+              <Route path="/products" element={<Navigate to="/" replace />} />
               <Route path="/products/:id" element={<ProductDetail />} />
               <Route path="/manuales" element={<Manuales />} />
               <Route path="/contacto" element={<Contacto />} />

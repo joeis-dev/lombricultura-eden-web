@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { Input, Loading } from '@components/common';
+import { Card, Input, Loading } from '@components/common';
 import ProductCard from '@components/product/ProductCard';
 import { getProducts } from '@services/productService';
 import type { Product } from '@app-types/index';
-import styles from './Home.module.css';
+import styles from '../Products/Products.module.css';
 
 const Home: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -17,6 +17,7 @@ const Home: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState(initialCategory);
   const [sortBy, setSortBy] = useState('name');
+  const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
 
   useEffect(() => {
     let cancelled = false;
@@ -46,11 +47,11 @@ const Home: React.FC = () => {
     };
   }, []);
 
-  const visibleCategories = useMemo(() => {
+  const categories = useMemo(() => {
     const uniqueCategories = Array.from(
       new Set(products.map((p) => p.category).filter((c): c is string => Boolean(c)))
     );
-    return uniqueCategories.sort((a, b) => a.localeCompare(b));
+    return ['Todas', ...uniqueCategories.sort((a, b) => a.localeCompare(b))];
   }, [products]);
 
   const filteredProducts = useMemo(() => {
@@ -90,8 +91,8 @@ const Home: React.FC = () => {
 
   if (isLoading) {
     return (
-      <div className={styles.storePage}>
-        <div className="container" style={{ display: 'flex', justifyContent: 'center', padding: '4rem 0' }}>
+      <div className={styles.productsPage}>
+        <div className={`container ${styles.loadingContainer}`}>
           <Loading size="lg" text="Cargando productos..." />
         </div>
       </div>
@@ -100,100 +101,135 @@ const Home: React.FC = () => {
 
   if (error) {
     return (
-      <div className={styles.storePage}>
-        <div className="container">
-          <div className={styles.noResults}>
-            <h3>No se pudieron cargar los productos</h3>
+      <div className={styles.productsPage}>
+        <div className={`container ${styles.errorContainer}`}>
+          <Card>
+            <h2>Error al cargar productos</h2>
             <p>{error}</p>
             <button className={styles.clearButton} onClick={() => window.location.reload()}>
               Intentar de Nuevo
             </button>
-          </div>
+          </Card>
         </div>
       </div>
     );
   }
 
   return (
-    <div className={styles.storePage}>
-      {/* Catalog */}
-      <section className={styles.catalogSection}>
-        <div className="container">
-          <div className={styles.catalogHeader}>
-            <h2 className={styles.catalogTitle}>Catálogo de Productos</h2>
-            <p className={styles.catalogSubtitle}>
-              {filteredProducts.length} producto{filteredProducts.length !== 1 ? 's' : ''} disponible{filteredProducts.length !== 1 ? 's' : ''}
-            </p>
-          </div>
+    <div className={styles.productsPage}>
+      <div className="container">
+        <div className={styles.productsLayout}>
+          <aside className={styles.filtersSidebar}>
+            <Card>
+              <Card.Header>
+                <h3>Filtros</h3>
+              </Card.Header>
+              <Card.Body>
+                <div className={styles.filterSection}>
+                  <h4>Buscar</h4>
+                  <Input
+                    placeholder="Buscar productos..."
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    leftIcon="🔍"
+                  />
+                </div>
 
-          <div className={styles.toolbar}>
-            <div className={styles.searchContainer}>
-              <Input
-                placeholder="Buscar productos..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                leftIcon="🔍"
-              />
+                <div className={styles.filterSection}>
+                  <h4>Categorías</h4>
+                  <div className={styles.categoryList}>
+                    {categories.map((category) => (
+                      <label key={category} className={styles.categoryItem}>
+                        <input
+                          type="radio"
+                          name="category"
+                          checked={selectedCategory === category}
+                          onChange={() => handleCategoryChange(category)}
+                        />
+                        <span>{category}</span>
+                      </label>
+                    ))}
+                  </div>
+                </div>
+              </Card.Body>
+            </Card>
+          </aside>
+
+          <main className={styles.mainContent}>
+            <div className={styles.toolbar}>
+              <div className={styles.toolbarLeft}>
+                <p className={styles.resultsCount}>
+                  {filteredProducts.length} producto{filteredProducts.length !== 1 ? 's' : ''} encontrado{filteredProducts.length !== 1 ? 's' : ''}
+                </p>
+              </div>
+
+              <div className={styles.toolbarRight}>
+                <div className={styles.viewToggle}>
+                  <button
+                    className={`${styles.viewButton} ${viewMode === 'grid' ? styles.active : ''}`}
+                    onClick={() => setViewMode('grid')}
+                    aria-label="Vista cuadrícula"
+                  >
+                    ⊞
+                  </button>
+                  <button
+                    className={`${styles.viewButton} ${viewMode === 'list' ? styles.active : ''}`}
+                    onClick={() => setViewMode('list')}
+                    aria-label="Vista lista"
+                  >
+                    ☰
+                  </button>
+                </div>
+
+                <select
+                  className={styles.sortSelect}
+                  value={sortBy}
+                  onChange={(e) => setSortBy(e.target.value)}
+                >
+                  <option value="name">Nombre</option>
+                  <option value="price-low">Menor precio</option>
+                  <option value="price-high">Mayor precio</option>
+                  <option value="newest">Más recientes</option>
+                </select>
+              </div>
             </div>
 
-            <select
-              className={styles.sortSelect}
-              value={sortBy}
-              onChange={(e) => setSortBy(e.target.value)}
-            >
-              <option value="name">Nombre</option>
-              <option value="price-low">Menor precio</option>
-              <option value="price-high">Mayor precio</option>
-              <option value="newest">Más recientes</option>
-            </select>
-          </div>
-
-          <div className={styles.categoryPills}>
-            <button
-              className={`${styles.categoryPill} ${selectedCategory === 'Todas' ? styles.active : ''}`}
-              onClick={() => handleCategoryChange('Todas')}
-            >
-              Todas
-            </button>
-            {visibleCategories.map((category) => (
-              <button
-                key={category}
-                className={`${styles.categoryPill} ${selectedCategory === category ? styles.active : ''}`}
-                onClick={() => handleCategoryChange(category)}
+            {filteredProducts.length > 0 ? (
+              <div
+                className={`${styles.productsContainer} ${
+                  styles[`productsContainer--${viewMode}`]
+                }`}
               >
-                {category}
-              </button>
-            ))}
-          </div>
-
-          {filteredProducts.length > 0 ? (
-            <div className={styles.productsGrid}>
-              {filteredProducts.map((product) => (
-                <ProductCard
-                  key={product.id}
-                  product={product}
-                  variant="default"
-                  showAddToCart={true}
-                />
-              ))}
-            </div>
-          ) : (
-            <div className={styles.noResults}>
-              <h3>No se encontraron productos</h3>
-              <p>Intenta ajustar tus filtros o términos de búsqueda</p>
-              <button
-                className={styles.clearButton}
-                onClick={() => {
-                  setSearchTerm('');
-                  handleCategoryChange('Todas');
-                }}
-              >
-                Limpiar Filtros
-              </button>
-            </div>
-          )}
+                {filteredProducts.map((product) => (
+                  <ProductCard
+                    key={product.id}
+                    product={product}
+                    variant={viewMode === 'list' ? 'compact' : 'default'}
+                  />
+                ))}
+              </div>
+            ) : (
+              <div className={styles.noResults}>
+                <Card>
+                  <div style={{ textAlign: 'center', padding: '3rem' }}>
+                    <h3>No se encontraron productos</h3>
+                    <p>Intenta ajustar tus filtros o términos de búsqueda</p>
+                    <button
+                      className={styles.clearButton}
+                      onClick={() => {
+                        setSearchTerm('');
+                        setSelectedCategory('Todas');
+                      }}
+                    >
+                      Limpiar Filtros
+                    </button>
+                  </div>
+                </Card>
+              </div>
+            )}
+          </main>
         </div>
-      </section>
+      </div>
     </div>
   );
 };

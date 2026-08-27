@@ -63,7 +63,7 @@ const ProductDetail: React.FC = () => {
 
     setIsAddingToCart(true);
     try {
-      await addItem(product, quantity);
+      await addItem(product, quantity, selectedVariant ?? undefined);
       await fetchCart();
       setAddedToCart(true);
       setTimeout(() => setAddedToCart(false), 2000);
@@ -78,7 +78,7 @@ const ProductDetail: React.FC = () => {
     if (!product) return;
 
     try {
-      await addItem(product, quantity);
+      await addItem(product, quantity, selectedVariant ?? undefined);
       await fetchCart();
       navigate('/checkout');
     } catch (err) {

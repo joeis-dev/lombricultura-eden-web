@@ -133,7 +133,6 @@ const Products: React.FC = () => {
                     key={product.id}
                     product={product}
                     variant={viewMode === 'list' ? 'compact' : 'default'}
-                    showAddToCart={false}
                   />
                 ))}
               </div>

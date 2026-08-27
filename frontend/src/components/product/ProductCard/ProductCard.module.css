@@ -221,69 +221,6 @@
   font-weight: var(--font-weight-medium);
 }
 
-/* Product Actions */
-.productActions {
-  margin-top: var(--space-3);
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-2);
-}
-
-.addToCartButton,
-.buyNowButton {
-  width: 100%;
-  padding: var(--space-3) var(--space-4);
-  color: white;
-  border: none;
-  border-radius: var(--radius-md);
-  font-size: var(--font-size-base);
-  font-weight: var(--font-weight-medium);
-  cursor: pointer;
-  transition: all var(--transition-normal);
-  text-align: center;
-}
-
-.addToCartButton {
-  background-color: var(--color-primary);
-}
-
-.buyNowButton {
-  background-color: var(--color-secondary);
-}
-
-.addToCartButton:hover:not(.disabled),
-.buyNowButton:hover:not(.disabled) {
-  transform: translateY(-1px);
-  box-shadow: var(--shadow-md);
-}
-
-.addToCartButton:hover:not(.disabled) {
-  background-color: var(--color-primary-hover);
-}
-
-.buyNowButton:hover:not(.disabled) {
-  filter: brightness(0.9);
-}
-
-.addToCartButton:focus-visible,
-.buyNowButton:focus-visible {
-  outline: 2px solid var(--color-primary);
-  outline-offset: 2px;
-}
-
-.addToCartButton.disabled,
-.buyNowButton.disabled {
-  background-color: var(--color-text-muted);
-  cursor: not-allowed;
-  opacity: 0.6;
-}
-
-.addToCartButton.disabled:hover,
-.buyNowButton.disabled:hover {
-  transform: none;
-  box-shadow: none;
-}
-
 /* Variants */
 .productCard--compact .productImage {
   padding-bottom: 75%; /* 4:3 aspect ratio */
@@ -302,11 +239,6 @@
   font-size: var(--font-size-lg);
 }
 
-.productCard--compact .addToCartButton {
-  padding: var(--space-2) var(--space-3);
-  font-size: var(--font-size-sm);
-}
-
 .productCard--detailed .productInfo {
   padding: var(--space-5);
 }
@@ -317,11 +249,6 @@
 
 .productCard--detailed .price {
   font-size: var(--font-size-2xl);
-}
-
-.productCard--detailed .addToCartButton {
-  padding: var(--space-4) var(--space-5);
-  font-size: var(--font-size-lg);
 }
 
 .productCard--half .productImage {
@@ -349,11 +276,6 @@
 .productCard--half .currencyTag,
 .productCard--half .stockInfo {
   font-size: var(--font-size-xs);
-}
-
-.productCard--half .addToCartButton {
-  padding: var(--space-2) var(--space-3);
-  font-size: var(--font-size-sm);
 }
 
 .productCard--half .productDescription {
@@ -399,11 +321,6 @@
   
   .price {
     font-size: var(--font-size-lg);
-  }
-  
-  .addToCartButton {
-    padding: var(--space-2) var(--space-3);
-    font-size: var(--font-size-sm);
   }
 }
 
@@ -453,8 +370,7 @@
   .productCard,
   .image,
   .quickActions,
-  .quickActionButton,
-  .addToCartButton {
+  .quickActionButton {
     transition: none;
   }
   
@@ -468,11 +384,6 @@
   
   .productCard:hover .quickActions {
     transform: none;
-  }
-  
-  .addToCartButton:hover:not(.disabled) {
-    transform: none;
-    box-shadow: none;
   }
 }
 
